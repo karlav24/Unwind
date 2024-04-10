@@ -38,8 +38,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun validateInput(name: String, email: String, password: String): Boolean {
-        // Here, you can add your validation logic
-        // For example, checking if the fields are not empty
+
         if (name.isEmpty()) {
             editTextName.error = "Name is required"
             return false
@@ -59,10 +58,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToNextActivity() {
-        // Move to the next activity
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("userName", editTextName.text)
         startActivity(intent)
-        finish() // Optional: Close the current activity from the stack
+        finish()
     }
 
 }

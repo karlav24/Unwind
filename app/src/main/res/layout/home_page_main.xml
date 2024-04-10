@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/android_lar"
+    android:layout_width="360dp"
+    android:layout_height="800dp"
+    android:clipToOutline="true"
+    android:background="#FFFFFF"
+    >
+    <TextView
+        android:id="@+id/welcome_bac"
+        android:layout_width="288dp"
+        android:layout_height="39dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="74dp"
+        android:text=""
+        android:textAppearance="@style/welcome_bac"
+        android:gravity="top"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_bac"
+        android:layout_marginTop="16dp" />
+
+
+
+</RelativeLayout>
+
+

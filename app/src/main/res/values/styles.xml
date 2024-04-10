@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="take_a_deep">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/habibi_regular</item>
     </style>
+
     <style name="relax_and_b">
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/habibi_regular</item>
     </style>
+
     <style name="unwind">
         <item name="android:textSize">64sp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/lily_script_one_regular</item>
     </style>
+
     <style name="start">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">#FFFFFF</item>
@@ -27,4 +31,15 @@
         <item name="android:fontFamily">@font/habibi_regular</item>
     </style>
 
+    <style name="welcome_bac">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:fontFamily">@font/habibi_regular</item>
+    </style>
+
+    <style name="i_am_delibe">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#F5F5F5</item>
+        <item name="android:fontFamily">@font/habibi_regular</item>
+    </style>
 </resources>
