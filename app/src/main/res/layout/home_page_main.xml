@@ -1,34 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/android_lar"
-    android:layout_width="360dp"
-    android:layout_height="800dp"
-    android:clipToOutline="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#FFFFFF"
-    >
+    android:clipToOutline="true">
+
+    <View
+        android:id="@+id/menu_vector"
+        android:layout_width="12dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/menu_vector" />
+
     <TextView
         android:id="@+id/welcome_bac"
         android:layout_width="288dp"
         android:layout_height="39dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="25dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="74dp"
-        android:text=""
-        android:textAppearance="@style/welcome_bac"
         android:gravity="top"
-        />
+        android:text=""
+        android:textAppearance="@style/welcome_bac" />
+
+    <View
+        android:id="@+id/rectangle_home"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="158dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/rectangle_home"
+        android:elevation="4dp" />
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/welcome_bac"
-        android:layout_marginTop="16dp" />
+        android:layout_alignTop="@+id/rectangle_home"
+        android:layout_alignBottom="@+id/rectangle_home"
+        android:layout_alignStart="@+id/rectangle_home"
+        android:layout_alignEnd="@+id/rectangle_home"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="6dp"/>
 
+
+    <View
+        android:id="@+id/meh_emoji"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="359dp"
+        android:background="@drawable/meh_emoji"
+        android:elevation="4dp"/>
+
+    <View
+        android:id="@+id/elated_emoji"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="359dp"
+        android:background="@drawable/elated_emoji"
+        android:elevation="4dp"/>
+
+    <View
+        android:id="@+id/depressed_emoji"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="319dp"
+        android:layout_marginLeft="301dp"
+        android:layout_marginTop="359dp"
+        android:background="@drawable/depressed_emoji"
+        android:elevation="4dp"/>
+
+    <View
+        android:id="@+id/sad_emoji"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="248dp"
+        android:layout_marginTop="359dp"
+        android:background="@drawable/sad_emoji"
+        android:elevation="4dp"/>
+
+    <View
+        android:id="@+id/happy_emoji"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="359dp"
+        android:background="@drawable/happy_emoji"
+        android:elevation="4dp"/>
+
+    <TextView
+        android:id="@+id/how_are_you"
+        android:layout_width="307dp"
+        android:layout_height="58dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="316dp"
+        android:gravity="top"
+        android:text="@string/how_are_you"
+        android:textAppearance="@style/how_are_you" />
+
+    <View
+        android:id="@+id/line_1"
+        android:layout_width="281dp"
+        android:layout_height="7dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="382dp"
+        android:background="@drawable/line_1" />
+
+
+
+    <!--    <View-->
+<!--        android:id="@+id/primary"-->
+<!--        android:layout_width="34dp"-->
+<!--        android:layout_height="23dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:background="#000000" />-->
+
+
+<!--    <View-->
+<!--        android:id="@+id/chatgpt_log"-->
+<!--        android:layout_width="9dp"-->
+<!--        android:layout_height="9dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginLeft="313dp"-->
+<!--        android:layout_marginTop="327dp"-->
+<!--        android:background="@drawable/chatgpt_log" />-->
+
+<!--    &lt;!&ndash; drawable/chatgpt_log.xml &ndash;&gt;-->
+<!--    <vector xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:aapt="http://schemas.android.com/aapt"-->
+<!--        android:width="9dp"-->
+<!--        android:height="9dp"-->
+<!--        android:viewportWidth="9"-->
+<!--        android:viewportHeight="9">-->
+
+<!--        <group>-->
+
+<!--            <clip-path android:pathData="M0 0H9V9H0V0Z" />-->
+<!--        </group>-->
+<!--    </vector>-->
 
 
 </RelativeLayout>
+
+
 
 

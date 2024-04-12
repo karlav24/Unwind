@@ -1,5 +1,6 @@
 package com.example.unwind
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,5 +29,7 @@ class QuotesFragment : Fragment() {
     private fun loadQuote() {
         val sampleQuote = "In the middle of every difficulty lies opportunity. - Albert Einstein"
         textViewQuote.text = sampleQuote
+        textViewQuote.setTextColor(Color.WHITE)
+
     }
 }
