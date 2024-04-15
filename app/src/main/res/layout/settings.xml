@@ -5,75 +5,88 @@
     android:background="#FFFFFF"
     android:clipToOutline="true" >
 
+
+    <View
+        android:id="@+id/back_button"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/back_button" />
+
     <TextView
         android:id="@+id/settings"
-        android:layout_width="130dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="218dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="33dp"
-        android:text="@string/settings"
-        android:textAppearance="@style/settings"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="17dp"
         android:gravity="top"
-        />
-
-
-
+        android:text="@string/settings"
+        android:textAppearance="@style/settings" />
 
     <TextView
         android:id="@+id/account"
-        android:layout_width="130dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="28dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="172dp"
-        android:text="@string/account"
-        android:textAppearance="@style/account"
         android:gravity="top"
-        />
+        android:text="@string/account"
+        android:textAppearance="@style/account" />
 
 
     <TextView
         android:id="@+id/logout"
-        android:layout_width="130dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="230dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="723dp"
-        android:text="@string/logout"
-        android:textAppearance="@style/logout"
+        android:layout_marginStart="270dp"
+        android:layout_marginLeft="279dp"
+        android:layout_marginTop="678dp"
         android:gravity="top"
-        />
+        android:text="@string/logout"
+        android:textAppearance="@style/logout" />
 
+    <View
+        android:id="@+id/logout_button"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="687dp"
+        android:background="@drawable/logout_button" />
 
     <TextView
         android:id="@+id/unwind_prem"
-        android:layout_width="259dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="28dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="313dp"
-        android:text="@string/unwind_prem"
-        android:textAppearance="@style/unwind_prem"
         android:gravity="top"
-        />
+        android:text="@string/unwind_prem"
+        android:textAppearance="@style/unwind_prem" />
 
     <TextView
         android:id="@+id/privacy"
-        android:layout_width="130dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="28dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="454dp"
-        android:text="@string/privacy"
-        android:textAppearance="@style/privacy"
         android:gravity="top"
-        />
+        android:text="@string/privacy"
+        android:textAppearance="@style/privacy" />
 
 
 <!--    <View-->

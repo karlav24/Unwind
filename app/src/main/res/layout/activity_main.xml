@@ -13,21 +13,21 @@
     android:clipToOutline="true"
     android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/take_a_deep"
-        android:layout_width="307dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="77dp"
-        android:text="@string/take_a_deep"
-        android:textAppearance="@style/take_a_deep"
-        android:gravity="top" />
-
     <!-- Font family: Habibi, Line height: 25sp -->
 
     <!-- Font family: Habibi, Line height: 40sp -->
 
     <!-- Font family: Lily Script One, Line height: 88sp -->
+
+    <TextView
+        android:id="@+id/take_a_deep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="75dp"
+        android:gravity="top"
+        android:text="@string/take_a_deep"
+        android:textAppearance="@style/take_a_deep" />
 
     <ImageView
         android:id="@+id/meditate"
@@ -42,8 +42,8 @@
 
     <TextView
         android:id="@+id/unwind"
-        android:layout_width="224dp"
-        android:layout_height="90dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/relax_and_b"
         android:layout_marginStart="95dp"
         android:layout_marginTop="27dp"
@@ -53,11 +53,11 @@
 
     <TextView
         android:id="@+id/relax_and_b"
-        android:layout_width="288dp"
-        android:layout_height="39dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/take_a_deep"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="15dp"
         android:gravity="top"
         android:text="@string/relax_and_b"
         android:textAppearance="@style/relax_and_b" />
@@ -71,6 +71,7 @@
         android:layout_marginTop="49dp"
         android:layout_marginEnd="17dp"
         android:gravity="top"
+        android:textAlignment="center"
         android:text="@string/start"
         android:textAppearance="@style/start"
         android:translationY="-20dp" />

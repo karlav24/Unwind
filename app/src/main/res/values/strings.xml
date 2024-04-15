@@ -14,4 +14,35 @@
     <string name="logout">Logout</string>
     <string name="unwind_prem">Unwind Premium</string>
     <string name="privacy">Privacy</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_nav">Nav</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!--breathe-->
+    <string name="for_today">For Today</string>
+    <string name="kundalini_y">Kundalini yoga</string>
+    <string name="the_breath_">The Breath of Fire</string>
+    <string name="virabhadras">(Virabhadrasana I)</string>
+    <string name="warrior_i">Warrior I</string>
+    <string name="from">from</string>
+
+
+
 </resources>

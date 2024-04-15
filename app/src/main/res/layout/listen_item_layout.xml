@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        android:id="@+id/rectangle_listen_affirmation"
+        android:layout_width="345dp"
+        android:layout_height="135dp"
+        android:background="@drawable/rectangle_listen_affirmation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/rectangle_listen_calm"
+        android:layout_width="345dp"
+        android:layout_height="135dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_listen_nature"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_listen_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_listen_affirmation" />
+
+    <View
+        android:id="@+id/rectangle_listen_color"
+        android:layout_width="345dp"
+        android:layout_height="135dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_listen_color"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_listen_nature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rectangle_listen_calm" />
+
+    <View
+        android:id="@+id/rectangle_listen_nature"
+        android:layout_width="345dp"
+        android:layout_height="135dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_listen_calm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.944" />
+
+    <View
+        android:id="@+id/wavy_affirmation"
+        android:layout_width="345dp"
+        android:layout_height="83dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/wavy_affirmation"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_affirmation"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_affirmation"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_affirmation"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_affirmation"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <View
+        android:id="@+id/wavy_color"
+        android:layout_width="345dp"
+        android:layout_height="83dp"
+        android:background="@drawable/wavy_color"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_color"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_color"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_color"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_color"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/wavy_calm"
+        android:layout_width="345dp"
+        android:layout_height="83dp"
+        android:background="@drawable/wavy_calm"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_calm"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_calm"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_calm"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_calm"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/wavy_nature"
+        android:layout_width="345dp"
+        android:layout_height="83dp"
+        android:background="@drawable/wavy_nature"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_nature"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_nature"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_nature"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_nature"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <!--    <TextView-->
+<!--        android:id="@+id/nature_soun"-->
+<!--        android:layout_width="165dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="102dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="682dp"-->
+<!--        android:text="@string/nature_soun"-->
+<!--        android:textAppearance="@style/nature_soun"-->
+<!--        android:gravity="top"-->
+<!--        />-->
+<!--    &lt;!&ndash;-->
+<!--    Font family: Habibi-->
+<!--    Line height: 30sp-->
+<!--    (identical to box height)-->
+<!--    &ndash;&gt;-->
+
+<!--    &lt;!&ndash; styles.xml &ndash;&gt;-->
+<!--    <style name="nature_soun">-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="android:textColor">#000000</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; strings.xml &ndash;&gt;-->
+<!--    <string name="nature_soun">-->
+<!--        Nature Sounds-->
+<!--    </string>-->
+
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/calm_music"-->
+<!--        android:layout_width="133dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="118dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="496dp"-->
+<!--        android:text="@string/calm_music"-->
+<!--        android:textAppearance="@style/calm_music"-->
+<!--        android:gravity="top"-->
+<!--        />-->
+<!--    &lt;!&ndash;-->
+<!--    Font family: Habibi-->
+<!--    Line height: 30sp-->
+<!--    (identical to box height)-->
+<!--    &ndash;&gt;-->
+
+<!--    &lt;!&ndash; styles.xml &ndash;&gt;-->
+<!--    <style name="calm_music">-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="android:textColor">#000000</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; strings.xml &ndash;&gt;-->
+<!--    <string name="calm_music">-->
+<!--        Calm Music-->
+<!--    </string>-->
+
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/color_noise"-->
+<!--        android:layout_width="133dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="114dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="316dp"-->
+<!--        android:text="@string/color_noise"-->
+<!--        android:textAppearance="@style/color_noise"-->
+<!--        android:gravity="top"-->
+<!--        />-->
+<!--    &lt;!&ndash;-->
+<!--    Font family: Habibi-->
+<!--    Line height: 30sp-->
+<!--    (identical to box height)-->
+<!--    &ndash;&gt;-->
+
+<!--    &lt;!&ndash; styles.xml &ndash;&gt;-->
+<!--    <style name="color_noise">-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="android:textColor">#000000</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; strings.xml &ndash;&gt;-->
+<!--    <string name="color_noise">-->
+<!--        Color Noise-->
+<!--    </string>-->
+
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/affirmation"-->
+<!--        android:layout_width="201dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="87dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="136dp"-->
+<!--        android:text="@string/affirmation"-->
+<!--        android:textAppearance="@style/affirmation"-->
+<!--        android:gravity="top"-->
+<!--        />-->
+<!--    &lt;!&ndash;-->
+<!--    Font family: Habibi-->
+<!--    Line height: 30sp-->
+<!--    (identical to box height)-->
+<!--    &ndash;&gt;-->
+
+<!--    &lt;!&ndash; styles.xml &ndash;&gt;-->
+<!--    <style name="affirmation">-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="android:textColor">#000000</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; strings.xml &ndash;&gt;-->
+<!--    <string name="affirmation">-->
+<!--        Affirmation Audio-->
+<!--    </string>-->
+
+
+
+<!--    <View-->
+<!--        android:id="@+id/primary"-->
+<!--        android:layout_width="38dp"-->
+<!--        android:layout_height="18dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:background="#000000"-->
+<!--        />-->
+
+
+
+<!--    <View-->
+<!--        android:id="@+id/primary"-->
+<!--        android:layout_width="22dp"-->
+<!--        android:layout_height="23dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:background="#000000"-->
+<!--        />-->
+
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/listen"-->
+<!--        android:layout_width="279dp"-->
+<!--        android:layout_height="34dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="127dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:text="@string/listen"-->
+<!--        android:textAppearance="@style/listen"-->
+<!--        android:gravity="top"-->
+<!--        />-->
+<!--    &lt;!&ndash;-->
+<!--    Font family: Habibi-->
+<!--    Line height: 40sp-->
+<!--    &ndash;&gt;-->
+
+<!--    &lt;!&ndash; styles.xml &ndash;&gt;-->
+<!--    <style name="listen">-->
+<!--        <item name="android:textSize">32sp</item>-->
+<!--        <item name="android:textColor">#000000</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; strings.xml &ndash;&gt;-->
+<!--    <string name="listen">-->
+<!--        Listen-->
+<!--    </string>-->
+
+
+
+<!--    <View-->
+<!--        android:id="@+id/spotify_ico"-->
+<!--        android:layout_width="26.23dp"-->
+<!--        android:layout_height="27dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="262dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:background="@drawable/spotify_ico"-->
+<!--        />-->
+
+<!--    &lt;!&ndash; drawable/spotify_ico.xml &ndash;&gt;-->
+<!--    <vector-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:aapt="http://schemas.android.com/aapt"-->
+<!--        android:width="26.23dp"-->
+<!--        android:height="27dp"-->
+<!--        android:viewportWidth="26.23"-->
+<!--        android:viewportHeight="27"-->
+<!--        >-->
+<!--        <group>-->
+<!--            <clip-path-->
+<!--                android:pathData="M0 0H26.2286V27H0V0Z"-->
+<!--                />-->
+<!--        </group>-->
+<!--    </vector>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

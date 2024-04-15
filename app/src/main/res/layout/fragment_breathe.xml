@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/back_button"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/back_button"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/rectangle_breathe1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/rectangle_breathe1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="125dp"
+        android:background="@drawable/rectangle_breathe1"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/rectangle_breathe2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="390dp"
+        android:background="@drawable/rectangle_breathe2"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_breathe3"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_breathe1"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_breathe1"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_breathe1" />
+
+    <!-- Rectangle Breathe 3 - Nested inside Rectangle Breathe 1 -->
+    <View
+        android:id="@+id/rectangle_breathe3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="390dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="140dp"
+        android:background="@drawable/rectangle_breathe3"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_breathe1"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_breathe1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_breathe1"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_breathe2"
+        app:layout_constraintVertical_bias="0.291" />
+
+
+    <TextView
+        android:id="@+id/for_today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:elevation="5dp"
+        android:gravity="top"
+        android:text="@string/for_today"
+        android:textAppearance="@style/for_today"
+        app:layout_constraintBottom_toTopOf="@id/rectangle_breathe2"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_breathe1"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="@id/rectangle_breathe1"
+        app:layout_constraintTop_toTopOf="@id/rectangle_breathe1"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/the_breath_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="150dp"
+        android:elevation="5dp"
+        android:gravity="right|top"
+        android:text="@string/the_breath_"
+        android:textAppearance="@style/the_breath_"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_breathe2"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_breathe2"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_breathe2"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_breathe2" />
+
+    <TextView
+        android:id="@+id/kundalini_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="179dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="100dp"
+        android:elevation="5dp"
+        android:text="@string/kundalini_y"
+        android:textAppearance="@style/kundalini_y"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_breathe2"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_breathe2"
+        app:layout_constraintStart_toStartOf="@id/rectangle_breathe2"
+        app:layout_constraintTop_toTopOf="@id/rectangle_breathe2" />
+
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="100dp"
+        android:elevation="5dp"
+        android:text="@string/from"
+        android:textAppearance="@style/from"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_breathe2"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_breathe2"
+        app:layout_constraintStart_toStartOf="@id/rectangle_breathe2"
+        app:layout_constraintTop_toTopOf="@id/rectangle_breathe2" />
+
+    <!--        <TextView-->
+<!--            android:id="@+id/virabhadras"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_alignStart="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignTop="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignEnd="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignBottom="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_marginStart="26dp"-->
+<!--            android:layout_marginLeft="59dp"-->
+<!--            android:layout_marginTop="71dp"-->
+<!--            android:layout_marginEnd="129dp"-->
+<!--            android:layout_marginBottom="162dp"-->
+<!--            android:elevation="5dp"-->
+<!--            android:gravity="top"-->
+<!--            android:text="@string/virabhadras"-->
+<!--            android:textAppearance="@style/virabhadras" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/warrior_i"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignStart="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignTop="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignEnd="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignBottom="@+id/rectangle_breathe3"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginStart="17dp"-->
+<!--            android:layout_marginTop="18dp"-->
+<!--            android:layout_marginEnd="-61dp"-->
+<!--            android:layout_marginRight="-29dp"-->
+<!--            android:layout_marginBottom="193dp"-->
+<!--            android:elevation="5dp"-->
+<!--            android:gravity="top"-->
+<!--            android:text="@string/warrior_i"-->
+<!--            android:textAppearance="@style/warrior_i" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+    <!--    <View-->
+    <!--        android:id="@+id/ellipse_12"-->
+    <!--        android:layout_width="134dp"-->
+    <!--        android:layout_height="134dp"-->
+    <!--        android:layout_alignParentStart="true"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_marginStart="175dp"-->
+    <!--        android:layout_marginTop="234dp"-->
+    <!--        android:background="@drawable/breath_of_fire"-->
+    <!--        android:elevation="4dp" />-->
+
+    <!--    &lt;!&ndash; drawable/yoga_pose_1.xml &ndash;&gt;-->
+
+<!--    <View-->
+<!--        android:id="@+id/yoga_pose_1"-->
+<!--        android:layout_width="201dp"-->
+<!--        android:layout_height="227dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginLeft="361dp"-->
+<!--        android:layout_marginTop="483dp"-->
+<!--        android:background="@drawable/yoga_pose_1" />-->
+
+<!--    <vector xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:aapt="http://schemas.android.com/aapt"-->
+<!--        android:width="201dp"-->
+<!--        android:height="227dp"-->
+<!--        android:viewportWidth="201"-->
+<!--        android:viewportHeight="227">-->
+
+<!--        <group>-->
+
+<!--            <clip-path android:pathData="M0 0H201V227H0V0Z" />-->
+<!--        </group>-->
+<!--    </vector>-->
+<!--</RelativeLayout>-->
