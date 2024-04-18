@@ -25,16 +25,18 @@
 //    }
 //}
 package com.example.unwind
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
 class SettingsActivity : AppCompatActivity() {
+    private lateinit var premiumButton : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings)
+        premiumButton = findViewById(R.id.unwind_prem)
 
         val backButton = findViewById<View>(R.id.back_button)
         backButton.setOnClickListener {
@@ -52,5 +54,10 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+        /*premiumButton.setOnClickListener{
+            val intent = Intent(this, PaymentActivity::class.java)
+            startActivity(intent)
+        }
+           */
     }
 }
