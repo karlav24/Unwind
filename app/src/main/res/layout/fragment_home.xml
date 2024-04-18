@@ -8,164 +8,222 @@
     android:clipToOutline="true">
 
     <ImageView
-        android:id="@+id/gpt_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:src="@mipmap/gpt_img_round"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/menu_vector"
-        android:layout_width="12dp"
-        android:layout_height="45dp"
+        android:id="@+id/breathe_img_button"
+        android:layout_width="214dp"
+        android:layout_height="526dp"
+        android:layout_below="@+id/elated_emoji"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/menu_vector" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="-84dp"
+        android:layout_marginEnd="233dp"
+        android:layout_marginBottom="0dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/breathe_img_button_foreground"
+        android:text="Breathe" />
+
+    <ImageView
+        android:id="@+id/listen_img_button"
+        android:layout_width="214dp"
+        android:layout_height="526dp"
+        android:layout_below="@+id/depressed_emoji"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="233dp"
+        android:layout_marginTop="-84dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="0dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/listen_img_button_foreground"
+        android:text="Listen" />
 
     <TextView
-        android:id="@+id/welcome_bac"
-        android:layout_width="288dp"
-        android:layout_height="39dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="74dp"
-        android:gravity="top"
-        android:text=""
-        android:textAppearance="@style/welcome_bac" />
-
-    <View
-        android:id="@+id/rectangle_home"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="158dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/rectangle_home"
-        android:elevation="4dp" />
-
-    <FrameLayout
-        android:id="@+id/fragmentQuoteContainer"
-        android:layout_width="match_parent"
+        android:id="@+id/text_breathe"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/rectangle_home"
-        android:layout_alignTop="@+id/rectangle_home"
-        android:layout_alignEnd="@+id/rectangle_home"
-        android:layout_alignBottom="@+id/rectangle_home"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:elevation="6dp" />
+        android:layout_alignStart="@+id/breathe_img_button"
+        android:layout_alignBottom="@+id/breathe_img_button"
+        android:layout_alignTop="@+id/breathe_img_button"
+        android:layout_alignEnd="@+id/breathe_img_button"
+        android:gravity="center"
+        android:elevation="10dp"
+        android:text="@string/breathe"
+        android:textAppearance="@style/breathe"/>
+
+    <TextView
+        android:id="@+id/text_listen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/listen_img_button"
+        android:layout_alignBottom="@+id/listen_img_button"
+        android:layout_alignTop="@+id/listen_img_button"
+        android:layout_alignEnd="@+id/listen_img_button"
+        android:gravity="center"
+        android:text="@string/listen"
+        android:textAppearance="@style/listen"
+        android:elevation="10dp"
+        />
+
+    <ImageView
+            android:id="@+id/gpt_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:src="@mipmap/gpt_img_round"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/menu_vector"
+            android:layout_width="12dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/menu_vector" />
+
+        <TextView
+            android:id="@+id/welcome_bac"
+            android:layout_width="288dp"
+            android:layout_height="39dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="74dp"
+            android:gravity="top"
+            android:text=""
+            android:textAppearance="@style/welcome_bac" />
+
+        <View
+            android:id="@+id/rectangle_home"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="158dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/rectangle_home"
+            android:elevation="4dp" />
+
+        <FrameLayout
+            android:id="@+id/fragmentQuoteContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/rectangle_home"
+            android:layout_alignTop="@+id/rectangle_home"
+            android:layout_alignEnd="@+id/rectangle_home"
+            android:layout_alignBottom="@+id/rectangle_home"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="6dp" />
 
 
-    <View
-        android:id="@+id/meh_emoji"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="177dp"
-        android:layout_marginTop="359dp"
-        android:background="@drawable/meh_emoji"
-        android:elevation="4dp"/>
+        <View
+            android:id="@+id/meh_emoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="174dp"
+            android:layout_marginTop="344dp"
+            android:background="@drawable/meh_emoji"
+            android:elevation="4dp" />
 
-    <View
-        android:id="@+id/elated_emoji"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="359dp"
-        android:background="@drawable/elated_emoji"
-        android:elevation="4dp"/>
+        <View
+            android:id="@+id/elated_emoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="344dp"
+            android:background="@drawable/elated_emoji"
+            android:elevation="4dp" />
 
-    <View
-        android:id="@+id/depressed_emoji"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="319dp"
-        android:layout_marginTop="359dp"
-        android:background="@drawable/depressed_emoji"
-        android:elevation="4dp"/>
+        <View
+            android:id="@+id/depressed_emoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="319dp"
+            android:layout_marginTop="344dp"
+            android:background="@drawable/depressed_emoji"
+            android:elevation="4dp" />
 
-    <View
-        android:id="@+id/sad_emoji"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="359dp"
-        android:background="@drawable/sad_emoji"
-        android:elevation="4dp"/>
+        <View
+            android:id="@+id/sad_emoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="251dp"
+            android:layout_marginTop="344dp"
+            android:background="@drawable/sad_emoji"
+            android:elevation="4dp" />
 
-    <View
-        android:id="@+id/happy_emoji"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="359dp"
-        android:background="@drawable/happy_emoji"
-        android:elevation="4dp"/>
+        <View
+            android:id="@+id/happy_emoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="344dp"
+            android:background="@drawable/happy_emoji"
+            android:elevation="4dp" />
 
     <TextView
         android:id="@+id/how_are_you"
         android:layout_width="307dp"
         android:layout_height="58dp"
+        android:layout_below="@+id/rectangle_home"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="23dp"
         android:gravity="top"
         android:text="@string/how_are_you"
         android:textAppearance="@style/how_are_you" />
 
-    <View
-        android:id="@+id/line_1"
-        android:layout_width="281dp"
-        android:layout_height="4dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="383dp"
-        android:background="@drawable/line_1" />
+        <View
+            android:id="@+id/line_1"
+            android:layout_width="281dp"
+            android:layout_height="4dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="362dp"
+            android:background="@drawable/line_1" />
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/nav_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
 
-</RelativeLayout>
+    </RelativeLayout>
 
 
 

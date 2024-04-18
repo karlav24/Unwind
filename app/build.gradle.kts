@@ -1,7 +1,3 @@
-import java.util.Properties
-import java.io.FileInputStream
-import java.io.FileNotFoundException
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -20,21 +16,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders["appAuthRedirectScheme"] = "unwindapp"
-        // Load the Spotify credentials
-        val secretsPropertiesFile = rootProject.file("secrets.properties")
-        if (secretsPropertiesFile.exists()) {
-            val secretsProperties = Properties().apply {
-                load(secretsPropertiesFile.inputStream())
-            }
-
-            // Access properties and assign them to fields in the BuildConfig
-            buildConfigField("String", "SPOTIFY_CLIENT_ID", "\"${secretsProperties["SPOTIFY_CLIENT_ID"]}\"")
-            buildConfigField("String", "SPOTIFY_CLIENT_SECRET", "\"${secretsProperties["SPOTIFY_CLIENT_SECRET"]}\"")
-            buildConfigField("String", "SPOTIFY_REDIRECT_URI", "\"${secretsProperties["SPOTIFY_REDIRECT_URI"]}\"")
-        } else {
-            throw FileNotFoundException("Could not find secrets.properties file at ${secretsPropertiesFile.absolutePath}")
-        }
     }
 
     buildTypes {
@@ -55,7 +36,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
 }
 
@@ -75,14 +55,4 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("net.openid:appauth:0.11.1")
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    // Retrofit for network requests
-    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Converter for JSON
-
-    // OkHttp for sending and receive HTTP-based network requests
-    implementation("com.squareup.okhttp3:okhttp:4.9.0") // OkHttp
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0") // Logging interceptor
 }

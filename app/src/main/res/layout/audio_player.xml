@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#192152"
+    android:clipToOutline="true">
+
+    <View
+        android:id="@+id/rectangle_9"
+        android:layout_width="378dp"
+        android:layout_height="719dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="47dp"
+        android:background="@drawable/rectangle_audio" />
+
+    <View
+        android:id="@+id/audio_player_pic"
+        android:layout_width="263dp"
+        android:layout_height="256dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="162dp"
+        android:background="@drawable/audio_player"
+        android:translationX="20dp" />
+
+
+    <TextView
+        android:id="@+id/the_robin"
+        android:layout_width="176dp"
+        android:layout_height="39dp"
+        android:layout_below="@id/audio_player_pic"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="99dp"
+        android:layout_marginTop="466dp"
+        android:gravity="top"
+        android:text="@string/song_title"
+        android:textAppearance="@style/song_title"
+        android:translationX="25dp" />
+
+    <ImageView
+        android:id="@+id/play_pause_button"
+        android:layout_width="100dp"
+        android:layout_height="112dp"
+        android:layout_below="@id/the_robin"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:onClick="onPlayPauseClick"
+        android:src="@drawable/play_button"
+        android:translationX="150dp" />
+
+    <!-- Previous track button -->
+
+    <ImageView
+        android:id="@+id/next_track_button"
+        android:layout_width="82dp"
+        android:layout_height="77dp"
+        android:layout_below="@id/the_robin"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="29dp"
+        android:layout_marginRight="85dp"
+        android:clickable="true"
+        android:onClick="onNextTrackClick"
+        android:src="@drawable/next_button"
+        android:translationX="25dp" />
+
+    <ImageView
+        android:id="@+id/prev_track_button"
+        android:layout_width="84dp"
+        android:layout_height="58dp"
+        android:layout_below="@id/the_robin"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="39dp"
+        android:clickable="true"
+        android:onClick="onPrevTrackClick"
+        android:src="@drawable/prev_button"
+        android:translationX="25dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/back_button"
+        android:backgroundTint="@android:color/transparent"
+        android:text=""
+        app:rippleColor="#000000" />
+</RelativeLayout>
