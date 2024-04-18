@@ -22,21 +22,35 @@ class AudioPlayerActivity : AppCompatActivity() {
         // Retrieve the resource ID from the intent extras
         val resourceId = intent.getIntExtra("TRACK_RESOURCE_ID", -1)
 
-        // Initialize MediaPlayer with the selected track
-        mediaPlayer = MediaPlayer.create(this, resourceId)
+        if (resourceId != -1) {
+            // Initialize MediaPlayer with the selected track
+            mediaPlayer = MediaPlayer.create(this, resourceId)
+            mediaPlayer?.setOnCompletionListener {
+                // Release MediaPlayer resources when playback completes
+                mediaPlayer?.release()
+            }
+        } else {
+            // If resource ID is invalid, finish the activity
+            finish()
+        }
         playButton = findViewById(R.id.play_pause_button)
-        // Start playing the audio track
-        playButton.setOnClickListener{
-            mediaPlayer?.start()
+        playButton.setOnClickListener {
+            mediaPlayer?.let {
+                if (it.isPlaying) {
+                    it.pause() // Pause playback if currently playing
+                } else {
+                    it.start() // Resume playback if paused
+                }
+            }
+
 
         }
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        // Release the MediaPlayer resources when the activity is destroyed
-        mediaPlayer?.release()
-        mediaPlayer = null
+        fun onDestroy() {
+            super.onDestroy()
+            // Release the MediaPlayer resources when the activity is destroyed
+            mediaPlayer?.release()
+            mediaPlayer = null
+        }
     }
 }
