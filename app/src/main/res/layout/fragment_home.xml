@@ -7,6 +7,18 @@
     android:background="#FFFFFF"
     android:clipToOutline="true">
 
+    <ImageView
+        android:id="@+id/gpt_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:src="@mipmap/gpt_img_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/menu_vector"
         android:layout_width="12dp"
