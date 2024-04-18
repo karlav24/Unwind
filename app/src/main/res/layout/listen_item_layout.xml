@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <View
         android:id="@+id/rectangle_listen_affirmation"
         android:layout_width="345dp"
@@ -15,7 +14,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/affirmationText"
+        android:layout_width="129dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:text="Affirmation"
+        android:textColor="#FFFFFF"
+        android:textAppearance="@style/start"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="43dp"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_affirmation"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_affirmation"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_affirmation"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_affirmation"/>
 
     <View
         android:id="@+id/rectangle_listen_calm"
@@ -26,7 +41,23 @@
         app:layout_constraintBottom_toTopOf="@+id/rectangle_listen_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_listen_affirmation" />
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_listen_affirmation"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/calmText"
+        android:layout_width="129dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:text="Calm"
+        android:textAppearance="@style/start"
+        android:textColor="#3F51B5"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_calm"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_calm"
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_calm"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_calm"
+        app:layout_constraintVertical_bias="0.705" />
 
     <View
         android:id="@+id/rectangle_listen_color"
@@ -37,7 +68,23 @@
         app:layout_constraintBottom_toTopOf="@+id/rectangle_listen_nature"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rectangle_listen_calm" />
+        app:layout_constraintTop_toBottomOf="@id/rectangle_listen_calm"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/colorText"
+        android:layout_width="129dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:text="Color"
+        android:textAppearance="@style/start"
+        android:textColor="#8A65C7"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_color"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_color"
+        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_color"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_color"
+        app:layout_constraintVertical_bias="0.221" />
 
     <View
         android:id="@+id/rectangle_listen_nature"
@@ -49,7 +96,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
+        app:layout_constraintVertical_bias="0.944"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/natureText"
+        android:layout_width="129dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:text="Nature"
+        android:textAppearance="@style/start"
+        android:textColor="#025A3B"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_nature"
+        app:layout_constraintEnd_toEndOf="@id/rectangle_listen_nature"
+        app:layout_constraintStart_toStartOf="@id/rectangle_listen_nature"
+        app:layout_constraintTop_toTopOf="@id/rectangle_listen_nature"
+        app:layout_constraintVertical_bias="0.252" />
 
     <View
         android:id="@+id/wavy_affirmation"
@@ -74,6 +136,7 @@
         android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_color"
         app:layout_constraintEnd_toEndOf="@id/rectangle_listen_color"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/rectangle_listen_color"
         app:layout_constraintTop_toTopOf="@id/rectangle_listen_color"
         app:layout_constraintVertical_bias="1.0" />
@@ -98,9 +161,10 @@
         android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="@id/rectangle_listen_nature"
         app:layout_constraintEnd_toEndOf="@id/rectangle_listen_nature"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/rectangle_listen_nature"
         app:layout_constraintTop_toTopOf="@id/rectangle_listen_nature"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.865" />
 
 
     <!--    <TextView-->
