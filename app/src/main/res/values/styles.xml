@@ -48,6 +48,26 @@
         <item name="android:textColor">#B0000000</item>
         <item name="android:fontFamily">@font/habibi_regular</item>
     </style>
+    <style name="breathe">
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:fontFamily">@font/habibi_regular</item>
+    </style>
+    <style name="listen">
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:fontFamily">@font/habibi_regular</item>
+    </style>
 <!--settings-->
     <style name="settings">
         <item name="android:textSize">32sp</item>
