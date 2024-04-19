@@ -11,7 +11,9 @@ plugins {
 android {
     namespace = "com.example.unwind"
     compileSdk = 34
-
+    buildFeatures{
+        buildConfig = true
+    }
     defaultConfig {
         applicationId = "com.example.unwind"
         minSdk = 24
@@ -76,13 +78,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("net.openid:appauth:0.11.1")
-    // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    // Retrofit for network requests
     implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Converter for JSON
-
-    // OkHttp for sending and receive HTTP-based network requests
     implementation("com.squareup.okhttp3:okhttp:4.9.0") // OkHttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0") // Logging interceptor
 }
