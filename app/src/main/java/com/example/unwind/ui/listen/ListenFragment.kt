@@ -1,6 +1,5 @@
 package com.example.unwind.ui.listen
 
-import ListenAdapter
 import android.graphics.Rect
 import android.content.Intent
 import android.os.Bundle
@@ -26,6 +25,7 @@ import net.openid.appauth.AuthorizationException
 import net.openid.appauth.ResponseTypeValues
 import net.openid.appauth.AuthorizationServiceConfiguration
 import com.example.unwind.BuildConfig
+import com.example.unwind.ui.listen.ListenAdapter
 import com.example.unwind.MeditationTracks.MeditationViewModel
 
 data class ListenItem(val text: String)
