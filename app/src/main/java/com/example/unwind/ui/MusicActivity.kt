@@ -1,4 +1,4 @@
-package com.example.unwind
+package com.example.unwind.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.unwind.MeditationTracks.MeditationTrack
 import com.example.unwind.MeditationTracks.MeditationTrackAdapter
 import com.example.unwind.MeditationTracks.MeditationViewModel
+import com.example.unwind.R
 
 class MusicActivity : AppCompatActivity() {
 

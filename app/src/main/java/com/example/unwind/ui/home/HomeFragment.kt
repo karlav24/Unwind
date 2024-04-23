@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.unwind.QuotesFragment
+import com.example.unwind.ui.QuotesFragment
 import com.example.unwind.R
-import com.example.unwind.SettingsActivity
+import com.example.unwind.ui.SettingsActivity
 import com.example.unwind.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

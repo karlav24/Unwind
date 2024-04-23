@@ -1,12 +1,10 @@
 package com.example.unwind.ui.listen
 
-import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.unwind.HomeActivity
 import com.example.unwind.R
 import com.example.unwind.databinding.AudioPlayerBinding
 

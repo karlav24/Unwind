@@ -1,4 +1,4 @@
-package com.example.unwind
+package com.example.unwind.ui
 
 //import android.content.Intent
 //import android.os.Bundle
@@ -30,19 +30,12 @@ package com.example.unwind
 //        }
 //    }
 //}
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.Window
-import android.view.WindowInsets
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.unwind.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
