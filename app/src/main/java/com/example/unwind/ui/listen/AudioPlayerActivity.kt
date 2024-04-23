@@ -1,10 +1,12 @@
 package com.example.unwind.ui.listen
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.unwind.HomeActivity
 import com.example.unwind.R
 import com.example.unwind.databinding.AudioPlayerBinding
 
@@ -13,12 +15,13 @@ class AudioPlayerActivity : AppCompatActivity() {
     private lateinit var binding: AudioPlayerBinding
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var playButton: ImageView
+    private lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AudioPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        button = findViewById(R.id.button)
         // Retrieve the resource ID from the intent extras
         val resourceId = intent.getIntExtra("TRACK_RESOURCE_ID", -1)
 
@@ -42,8 +45,9 @@ class AudioPlayerActivity : AppCompatActivity() {
                     it.start() // Resume playback if paused
                 }
             }
-
-
+            button.setOnClickListener{
+                finish()
+            }
         }
 
         fun onDestroy() {
