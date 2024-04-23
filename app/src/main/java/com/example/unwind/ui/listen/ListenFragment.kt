@@ -26,6 +26,8 @@ import net.openid.appauth.AuthorizationException
 import net.openid.appauth.ResponseTypeValues
 import net.openid.appauth.AuthorizationServiceConfiguration
 import com.example.unwind.BuildConfig
+import com.example.unwind.R
+
 import com.example.unwind.MeditationTracks.MeditationViewModel
 
 data class ListenItem(val text: String)
@@ -59,6 +61,7 @@ class ListenFragment : Fragment() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = ListenAdapter(getDummyData())
+            //addItemDecoration(TopSpacingDecoration(paddingTop = resources.getDimensionPixelSize(R.dimen.recycler_view_padding_top), paddingBottom = resources.getDimensionPixelSize(R.dimen.recycler_view_padding_bottom), spacing = resources.getDimensionPixelSize(R.dimen.recycler_view_spacing)))
         }
     }
 
@@ -142,13 +145,18 @@ class ListenFragment : Fragment() {
         // Other constants as needed
     }
 }
-class TopSpacingDecoration(private val paddingTop: Int) : RecyclerView.ItemDecoration() {
-    override fun getItemOffsets(
-        outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
-    ) {
+
+class TopSpacingDecoration(private val paddingTop: Int, private val paddingBottom: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val position = parent.getChildAdapterPosition(view)
-        if (position == 0) {
-            outRect.top = paddingTop
-        }
+        outRect.top = spacing
+        outRect.bottom = spacing
+//        if (position == 0) {
+//            outRect.top = paddingTop
+//        }
+//        if (position == parent.adapter!!.itemCount - 1) {
+//            outRect.bottom = paddingBottom
+//        }
+
     }
 }
