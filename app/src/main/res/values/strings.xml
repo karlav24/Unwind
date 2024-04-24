@@ -50,5 +50,23 @@
     <string name="from">from</string>
     <string name="song_title">The Robin</string>
 
-
+    <!-- premium-->
+    <string name="first_7_day">
+        First 7 Days FREE!
+    </string>
+    <string name="unlock_heal">
+        Unlock Health Connect, the entire Listen library and more!
+    </string>
+    <string name="connect_you">
+        Connect your phone\'s Health application for health and activity personalization!
+    </string>
+    <string name="enable_chat">
+        Enable ChatGPT for a vent bot and to generate a personalized guide that uses meditation techniques tailored to your specific needs.
+    </string>
+    <string name="only_30_mon">
+        Only $30/month ($360/year)
+    </string>
+    <string name="which_is_le">
+        (which is less than $1/day)!!!
+    </string>
 </resources>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        android:id="@+id/back_button"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/back_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005" />
+
+    <TextView
+        android:id="@+id/first_7_day"
+        android:layout_width="229dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="30dp"
+        android:elevation="5dp"
+        android:gravity="top"
+        android:text="@string/first_7_day"
+        android:textAppearance="@style/first_7_day"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:layout_width="650dp"
+        android:layout_height="585dp"
+        android:layout_marginBottom="188dp"
+        android:contentDescription="Image of yoga pose with yellow background"
+        android:elevation="6dp"
+        android:src="@mipmap/prem_img_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/unlock_heal"
+        android:layout_width="327dp"
+        android:layout_height="71dp"
+        android:elevation="5dp"
+        android:gravity="center_horizontal|top"
+        android:text="@string/unlock_heal"
+        android:textAppearance="@style/unlock_heal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_7_day"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <View
+        android:id="@+id/rectangle_prem"
+        android:layout_width="311dp"
+        android:layout_height="349dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/rectangle_prem"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958" />
+
+
+    <TextView
+        android:id="@+id/connect_you"
+        android:layout_width="156dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="120dp"
+        android:elevation="5dp"
+        android:gravity="top"
+        android:text="@string/connect_you"
+        android:textAppearance="@style/connect_you"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
+        app:layout_constraintVertical_bias="0.769" />
+
+    <TextView
+        android:id="@+id/enable_chat"
+        android:layout_width="157dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="121dp"
+        android:elevation="5dp"
+        android:gravity="top"
+        android:text="@string/enable_chat"
+        android:textAppearance="@style/enable_chat"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
+        app:layout_constraintVertical_bias="0.33" />
+
+
+    <TextView
+        android:id="@+id/unwind_prem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:gravity="top"
+        android:text="@string/unwind_prem"
+        android:textAppearance="@style/unwind_prem"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <View
+        android:id="@+id/rectangle_prem_buy"
+        android:layout_width="265dp"
+        android:layout_height="39dp"
+        android:background="@drawable/rectangle_prem_buy"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
+        app:layout_constraintVertical_bias="0.951" />
+
+    <TextView
+        android:id="@+id/only_30_mon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:text="@string/only_30_mon"
+        android:textAlignment="center"
+        android:textAppearance="@style/only_30_mon"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem_buy"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem_buy"
+        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem_buy"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem_buy"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/which_is_le"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:elevation="5dp"
+        android:text="@string/which_is_le"
+        android:textAlignment="center"
+        android:textAppearance="@style/which_is_le"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem_buy"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem_buy"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem_buy"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem_buy"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
