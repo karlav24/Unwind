@@ -38,16 +38,17 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:layout_width="650dp"
-        android:layout_height="585dp"
-        android:layout_marginBottom="188dp"
+        android:layout_width="408dp"
+        android:layout_height="442dp"
         android:contentDescription="Image of yoga pose with yellow background"
         android:elevation="6dp"
         android:src="@mipmap/prem_img_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
 
     <TextView
         android:id="@+id/unlock_heal"
@@ -63,25 +64,49 @@
         app:layout_constraintTop_toBottomOf="@+id/first_7_day"
         app:layout_constraintVertical_bias="0.015" />
 
+
     <View
         android:id="@+id/rectangle_prem"
-        android:layout_width="311dp"
-        android:layout_height="349dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="349dp"
+        android:layout_height="375dp"
         android:background="@drawable/rectangle_prem"
         android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958" />
+        app:layout_constraintVertical_bias="0.962" />
 
+    <View
+        android:layout_width="60dp"
+        android:layout_height="56dp"
+        android:background="@drawable/health_connect"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
+        app:layout_constraintVertical_bias="0.68" />
+
+    <ImageView
+        android:id="@+id/gpt_button"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
+        android:elevation="6dp"
+        android:src="@mipmap/gpt_img_round"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
+        app:layout_constraintVertical_bias="0.36" />
 
     <TextView
         android:id="@+id/connect_you"
-        android:layout_width="156dp"
-        android:layout_height="76dp"
+        android:layout_width="233dp"
+        android:layout_height="65dp"
         android:layout_marginStart="120dp"
         android:elevation="5dp"
         android:gravity="top"
@@ -89,27 +114,25 @@
         android:textAppearance="@style/connect_you"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
         app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
-        app:layout_constraintVertical_bias="0.769" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/enable_chat"
-        android:layout_width="157dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="121dp"
+        android:layout_width="222dp"
+        android:layout_height="102dp"
         android:elevation="5dp"
         android:gravity="top"
         android:text="@string/enable_chat"
         android:textAppearance="@style/enable_chat"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
-        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintHorizontal_bias="0.905"
         app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
         app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
-        app:layout_constraintVertical_bias="0.33" />
-
+        app:layout_constraintVertical_bias="0.344" />
 
     <TextView
         android:id="@+id/unwind_prem"
@@ -128,14 +151,15 @@
     <View
         android:id="@+id/rectangle_prem_buy"
         android:layout_width="265dp"
-        android:layout_height="39dp"
+        android:layout_height="45dp"
         android:background="@drawable/rectangle_prem_buy"
         android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="@+id/rectangle_prem"
         app:layout_constraintTop_toTopOf="@+id/rectangle_prem"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintVertical_bias="0.945" />
 
     <TextView
         android:id="@+id/only_30_mon"
@@ -147,10 +171,10 @@
         android:textAppearance="@style/only_30_mon"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem_buy"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_prem_buy"
-        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="@+id/rectangle_prem_buy"
         app:layout_constraintTop_toTopOf="@+id/rectangle_prem_buy"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.444" />
 
     <TextView
         android:id="@+id/which_is_le"
@@ -163,7 +187,7 @@
         android:textAppearance="@style/which_is_le"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem_buy"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_prem_buy"
-        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="@+id/rectangle_prem_buy"
         app:layout_constraintTop_toTopOf="@+id/rectangle_prem_buy"
         app:layout_constraintVertical_bias="1.0" />
