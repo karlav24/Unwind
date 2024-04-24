@@ -37,7 +37,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings)
-        premiumButton = findViewById(R.id.unwind_prem)
+        //premiumButton = findViewById(R.id.unwind_prem)
 
         val backButton = findViewById<View>(R.id.back_button)
         backButton.setOnClickListener {

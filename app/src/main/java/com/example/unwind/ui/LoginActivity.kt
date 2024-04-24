@@ -46,8 +46,8 @@ class LoginActivity : AppCompatActivity() {
             return false
         }
 
-        if (email.isEmpty()) {
-            editTextEmail.error = "Email is required"
+        if (!(email.contains("@") && email.contains(".")) ) {
+            editTextEmail.error = "Valid email is required"
             return false
         }
 
