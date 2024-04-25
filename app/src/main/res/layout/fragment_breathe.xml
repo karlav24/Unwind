@@ -35,7 +35,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <ImageView
+        android:id="@+id/yoga_pose_image"
+        android:src="@drawable/icon_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
     <View
         android:id="@+id/rectangle_breathe2"
         android:layout_width="0dp"
@@ -138,13 +143,7 @@
         app:layout_constraintStart_toStartOf="@id/rectangle_breathe2"
         app:layout_constraintTop_toTopOf="@id/rectangle_breathe2" />
 
-    <ImageView
-        android:id="@+id/yoga_pose_image"
-        android:src="@drawable/icon_placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/from"
-        android:layout_marginTop="16dp"/>
+
 
     <!--        <TextView-->
 <!--            android:id="@+id/virabhadras"-->
