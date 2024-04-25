@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -20,50 +21,94 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.005" />
 
+
     <TextView
         android:id="@+id/first_7_day"
         android:layout_width="229dp"
         android:layout_height="32dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="29dp"
         android:elevation="5dp"
         android:gravity="top"
         android:text="@string/first_7_day"
         android:textAppearance="@style/first_7_day"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001" />
+
+    <View
+        android:id="@+id/ellipse_prem1"
+        android:layout_width="428dp"
+        android:layout_height="432dp"
+        android:background="@drawable/ellipse_prem1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
+    <View
+        android:id="@+id/ellipse_prem_outline1"
+        android:layout_width="334dp"
+        android:layout_height="330dp"
+        android:background="@drawable/ellipse_prem_outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099" />
+
+    <View
+        android:id="@+id/ellipse_prem_outline2"
+        android:layout_width="372dp"
+        android:layout_height="353dp"
+        android:background="@drawable/ellipse_prem_outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099" />
+
+    <View
+        android:id="@+id/ellipse_prem2"
+        android:layout_width="277dp"
+        android:layout_height="283dp"
+        android:background="@drawable/ellipse_prem2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.138" />
+
+    <View
+        android:id="@+id/ellipse_prem3"
+        android:layout_width="235dp"
+        android:layout_height="224dp"
+        android:background="@drawable/ellipse_prem1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.183" />
+
     <ImageView
-        android:layout_width="408dp"
-        android:layout_height="442dp"
+        android:layout_width="244dp"
+        android:layout_height="176dp"
         android:contentDescription="Image of yoga pose with yellow background"
         android:elevation="6dp"
+        android:scaleType="centerCrop"
         android:src="@mipmap/prem_img_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:id="@+id/unlock_heal"
-        android:layout_width="327dp"
-        android:layout_height="71dp"
-        android:elevation="5dp"
-        android:gravity="center_horizontal|top"
-        android:text="@string/unlock_heal"
-        android:textAppearance="@style/unlock_heal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_7_day"
-        app:layout_constraintVertical_bias="0.015" />
-
+        app:layout_constraintVertical_bias="0.207" />
 
     <View
         android:id="@+id/rectangle_prem"
