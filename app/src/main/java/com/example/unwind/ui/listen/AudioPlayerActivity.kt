@@ -2,6 +2,7 @@ package com.example.unwind.ui.listen
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -34,8 +35,7 @@ class AudioPlayerActivity : AppCompatActivity() {
             // If resource ID is invalid, finish the activity
             finish()
         }
-        playButton = findViewById(R.id.play_pause_button)
-        playButton.setOnClickListener {
+        fun onPlayPauseClick(view: View) {
             mediaPlayer?.let {
                 if (it.isPlaying) {
                     it.pause() // Pause playback if currently playing
@@ -43,16 +43,19 @@ class AudioPlayerActivity : AppCompatActivity() {
                     it.start() // Resume playback if paused
                 }
             }
-            button.setOnClickListener{
-                finish()
-            }
         }
+        button.setOnClickListener {
+            finish()
+        }
+    }
 
-        fun onDestroy() {
+
+        override fun onDestroy() {
             super.onDestroy()
             // Release the MediaPlayer resources when the activity is destroyed
             mediaPlayer?.release()
             mediaPlayer = null
         }
     }
-}
+
+

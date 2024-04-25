@@ -83,4 +83,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Converter for JSON
     implementation("com.squareup.okhttp3:okhttp:4.9.0") // OkHttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0") // Logging interceptor
+    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("com.google.code.gson:gson:2.10.1")
+
 }
