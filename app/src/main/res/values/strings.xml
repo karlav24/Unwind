@@ -69,4 +69,21 @@
     <string name="which_is_le">
         (which is less than $1/day)!!!
     </string>
+
+<!--mood journal-->
+    <string name="add_journal_entry">
+        Add Journal Entry
+    </string>
+    <string name="save_journal_entry">
+        Save
+    </string>
+    <string name="mood_you_selected">Mood You Selected</string>
+    <string name="date_placeholder">Date Placeholder</string>
+    <string name="journal_entry_preview">Journal Entry Preview</string>
+    <string name="listen_button">Listen Button</string>
+    <string name="happy_emoji">happy emoji</string>
+    <string name="sad_emoji">sad emoji</string>
+    <string name="depressed_emoji">depressed emoji</string>
+    <string name="elated_emoji">elated emoji</string>
+    <string name="okay_feeling_emoji">okay feeling emoji</string>
 </resources>

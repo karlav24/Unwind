@@ -7,8 +7,9 @@
     android:background="#FFFFFF"
     android:clipToOutline="true">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/breathe_img_button"
+        android:contentDescription="@string/breathe"
         android:layout_width="214dp"
         android:layout_height="526dp"
         android:layout_below="@+id/elated_emoji"
@@ -20,11 +21,12 @@
         android:layout_marginEnd="233dp"
         android:layout_marginBottom="0dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/breathe_img_button_foreground"
-        android:text="Breathe" />
+        android:background="@null"
+        android:src="@mipmap/breathe_img_button_foreground"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/listen_img_button"
+        android:contentDescription="@string/listen"
         android:layout_width="214dp"
         android:layout_height="526dp"
         android:layout_below="@+id/depressed_emoji"
@@ -36,8 +38,10 @@
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="0dp"
         android:scaleType="centerCrop"
+        android:background="@null"
+
         android:src="@mipmap/listen_img_button_foreground"
-        android:text="Listen" />
+        />
 
     <TextView
         android:id="@+id/text_breathe"
@@ -91,9 +95,9 @@
             android:id="@+id/welcome_bac"
             android:layout_width="288dp"
             android:layout_height="39dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="74dp"
             android:gravity="top"
             android:text=""
@@ -125,8 +129,9 @@
             android:elevation="6dp" />
 
 
-        <View
+        <ImageButton
             android:id="@+id/meh_emoji"
+            android:contentDescription="@string/okay_feeling_emoji"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
@@ -134,10 +139,12 @@
             android:layout_marginStart="174dp"
             android:layout_marginTop="344dp"
             android:background="@drawable/meh_emoji"
-            android:elevation="4dp" />
+            android:elevation="4dp"
+            android:onClick="onEmojiClicked" />
 
-        <View
+        <ImageButton
             android:id="@+id/elated_emoji"
+            android:contentDescription="@string/elated_emoji"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
@@ -145,10 +152,12 @@
             android:layout_marginStart="34dp"
             android:layout_marginTop="344dp"
             android:background="@drawable/elated_emoji"
-            android:elevation="4dp" />
+            android:elevation="4dp"
+            android:onClick="onEmojiClicked" />
 
-        <View
+        <ImageButton
             android:id="@+id/depressed_emoji"
+            android:contentDescription="@string/depressed_emoji"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
@@ -156,10 +165,12 @@
             android:layout_marginStart="319dp"
             android:layout_marginTop="344dp"
             android:background="@drawable/depressed_emoji"
-            android:elevation="4dp" />
+            android:elevation="4dp"
+            android:onClick="onEmojiClicked" />
 
-        <View
+    <ImageButton
             android:id="@+id/sad_emoji"
+            android:contentDescription="@string/sad_emoji"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
@@ -167,18 +178,22 @@
             android:layout_marginStart="251dp"
             android:layout_marginTop="344dp"
             android:background="@drawable/sad_emoji"
-            android:elevation="4dp" />
+            android:elevation="4dp"
+            android:onClick="onEmojiClicked" />
 
-        <View
-            android:id="@+id/happy_emoji"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="107dp"
-            android:layout_marginTop="344dp"
-            android:background="@drawable/happy_emoji"
-            android:elevation="4dp" />
+    <ImageButton
+        android:id="@+id/happy_emoji"
+        android:contentDescription="@string/happy_emoji"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="344dp"
+        android:background="@drawable/happy_emoji"
+        android:elevation="4dp"
+        android:onClick="onEmojiClicked" />
+
 
     <TextView
         android:id="@+id/how_are_you"
