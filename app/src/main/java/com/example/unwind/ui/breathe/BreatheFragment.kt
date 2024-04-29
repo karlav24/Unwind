@@ -46,6 +46,8 @@ class BreatheFragment : Fragment() {
                 .load(randomYogaPose.url_png)
                 .error(R.drawable.ic_play)
                 .into(binding.yogaPoseImage)
+            binding.yogaPoseImage.bringToFront()
+            binding.poseDescription.text = randomYogaPose.pose_description
             // You can access other properties of randomYogaPose as needed
         }
     }

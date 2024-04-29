@@ -106,6 +106,11 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/habibi_regular</item>
     </style>
+    <style name="pose_desc">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/habibi_regular</item>
+    </style>
     <style name="the_breath_">
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">#FFFFFF</item>
