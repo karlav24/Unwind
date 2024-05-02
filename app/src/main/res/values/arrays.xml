@@ -9,4 +9,24 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <array name="raw_music_tracks">
+        <item>@raw/affirmation_1</item>
+        <item>@raw/affirmation_2</item>
+        <item>@raw/affirmation_3</item>
+        <item>@raw/affirmation_4</item>
+        <item>@raw/affirmation_5</item>
+        <item>@raw/calm_1</item>
+        <item>@raw/calm_2</item>
+        <item>@raw/calm_3</item>
+        <item>@raw/calm_4</item>
+        <item>@raw/color_1</item>
+        <item>@raw/color_2</item>
+        <item>@raw/color_3</item>
+        <item>@raw/color_4</item>
+        <item>@raw/nature_1</item>
+        <item>@raw/nature_2</item>
+        <item>@raw/nature_3</item>
+        <item>@raw/nature_4</item>
+    </array>
 </resources>
