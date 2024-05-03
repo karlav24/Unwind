@@ -12,5 +12,6 @@ interface MusicTrackDao {
     @Insert
     fun insertMusicTrack(musicTrack: MusicTrack)
 
-
+    @Query("SELECT * FROM music_tracks WHERE genre = :genre")
+    fun getAllMusicTracksByGenre(genre: String): List<MusicTrack>
 }

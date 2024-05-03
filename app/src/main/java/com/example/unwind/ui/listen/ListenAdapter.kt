@@ -23,30 +23,29 @@ class ListenAdapter(private val dataList: List<ListenItem>) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
         val binding = holder.binding
-
-        // Set click listener for each item
+        val genres = listOf("Affirmation", "Calm", "Color", "Nature")
         binding.rectangleListenAffirmation.setOnClickListener {
-            // Launch AudioPlayerActivity with corresponding track based on position
-            launchAudioPlayer(R.raw.affirmation_1)
+            // Launch AudioPlayerActivity with corresponding track based on genre
+            launchAudioPlayer(genres[0])
         }
         binding.rectangleListenCalm.setOnClickListener{
-            launchAudioPlayer(R.raw.calm_1)
+            launchAudioPlayer(genres[1])
         }
         binding.rectangleListenColor.setOnClickListener{
-            launchAudioPlayer(R.raw.color_1)
+            launchAudioPlayer(genres[2])
         }
         binding.rectangleListenNature.setOnClickListener{
-            launchAudioPlayer(R.raw.nature_1)
+            launchAudioPlayer(genres[3])
         }
     }
 
     override fun getItemCount() = dataList.size
 
-    private fun launchAudioPlayer(resourceId: Int) {
+    private fun launchAudioPlayer(genre: String) {
         // Create an intent to launch AudioPlayerActivity
         val intent = Intent(context, AudioPlayerActivity::class.java).apply {
             // Pass the resource ID of the selected track as an extra
-            putExtra("TRACK_RESOURCE_ID", resourceId)
+            putExtra("SELECTED_GENRE", genre)
         }
         // Start AudioPlayerActivity
         context.startActivity(intent)

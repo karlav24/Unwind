@@ -1,20 +1,32 @@
 package com.example.unwind.music
 
 import android.content.Context
+import android.util.Log
 import com.example.unwind.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class DatabaseInitializer(private val context: Context) {
     private val musicTrackDao = MusicDatabase.getDatabase(context).musicTrackDao()
 
-    fun initializeDatabase() {
-        if (musicTrackDao.getAllMusicTracks().isEmpty()) {
-            val musicTracks = loadMusicTracksFromRaw(context)
-            for (musicTrack in musicTracks) {
-                musicTrackDao.insertMusicTrack(musicTrack)
+    suspend fun initializeDatabase() {
+        withContext(Dispatchers.IO) {
+            if (musicTrackDao.getAllMusicTracks().isEmpty()) {
+                val musicTracks = loadMusicTracksFromRaw(context)
+                for (musicTrack in musicTracks) {
+                    musicTrackDao.insertMusicTrack(musicTrack)
+                }
             }
         }
     }
-
+    suspend fun getAllTracksByGenre(genre: String): List<MusicTrack> {
+        val lowercaseGenre = genre.lowercase()
+        return withContext(Dispatchers.IO) {
+            val musicTracks = musicTrackDao.getAllMusicTracksByGenre(lowercaseGenre)
+            Log.d("DatabaseInitializer", "Retrieved ${musicTracks.size} tracks for genre: $lowercaseGenre")
+            musicTracks
+        }
+    }
     private fun loadMusicTracksFromRaw(context: Context): List<MusicTrack> {
         val musicTracks = mutableListOf<MusicTrack>()
         val resources = context.resources
@@ -24,7 +36,14 @@ class DatabaseInitializer(private val context: Context) {
             val resourceId = rawResources.getResourceId(i, 0)
             val resourceName = resources.getResourceEntryName(resourceId)
             val genre = extractGenreFromFileName(resourceName)
-            val musicTrack = MusicTrack(title = resourceName, artist = "Unknown", genre = genre)
+
+            // Create a MusicTrack object with the resource ID
+            val musicTrack = MusicTrack(
+                title = resourceName,
+                artist = "Unknown",
+                genre = genre,
+                resourceId = resourceId // Pass the obtained resource ID
+            )
             musicTracks.add(musicTrack)
         }
 
