@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.unwind.R
 import com.example.unwind.databinding.AudioPlayerBinding
 import com.example.unwind.music.DatabaseInitializer
+import com.example.unwind.music.MusicTrack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,6 +20,10 @@ class AudioPlayerActivity : AppCompatActivity() {
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var playPauseButton: ImageView
     private lateinit var backButton: Button
+    private lateinit var nextButton: ImageView
+    private lateinit var previousButton: ImageView
+    private lateinit var musicTracks: List<MusicTrack>
+    private var currentTrackIndex: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.audio_player)
@@ -27,7 +32,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         // Launch a coroutine to perform database operation asynchronously
         GlobalScope.launch(Dispatchers.Main) {
             // Use withContext to switch to the IO dispatcher for database operation
-            val musicTracks = withContext(Dispatchers.IO) {
+            musicTracks = withContext(Dispatchers.IO) {
                 DatabaseInitializer(this@AudioPlayerActivity).getAllTracksByGenre(selectedGenre ?: "")
             }
 
@@ -54,8 +59,23 @@ class AudioPlayerActivity : AppCompatActivity() {
             backButton.setOnClickListener {
                 finish()
             }
-        }
+            nextButton = findViewById(R.id.next_track_button)
+            nextButton.setOnClickListener {
+                playNextTrack()
+            }
 
+            previousButton = findViewById(R.id.prev_track_button)
+            previousButton.setOnClickListener {
+                playPreviousTrack()
+            }
+        }
+        private fun initializeMediaPlayer(trackIndex: Int) {
+            mediaPlayer = MediaPlayer.create(this@AudioPlayerActivity, musicTracks[trackIndex].resourceId)
+            mediaPlayer.setOnCompletionListener {
+                // Release MediaPlayer resources when playback completes
+                mediaPlayer.release()
+            }
+        }
         private fun onPlayPauseClick() {
             mediaPlayer.let {
                 if (it.isPlaying) {
@@ -67,7 +87,19 @@ class AudioPlayerActivity : AppCompatActivity() {
                 }
             }
         }
+        private fun playNextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % musicTracks.size
+            mediaPlayer.release() // Release resources before initializing MediaPlayer with the next track
+            initializeMediaPlayer(currentTrackIndex)
+            mediaPlayer.start() // Start playback of the next track
+        }
 
+        private fun playPreviousTrack() {
+            currentTrackIndex = if (currentTrackIndex > 0) currentTrackIndex - 1 else musicTracks.size - 1
+            mediaPlayer.release() // Release resources before initializing MediaPlayer with the previous track
+            initializeMediaPlayer(currentTrackIndex)
+            mediaPlayer.start() // Start playback of the previous track
+        }
 
     override fun onDestroy() {
             super.onDestroy()
