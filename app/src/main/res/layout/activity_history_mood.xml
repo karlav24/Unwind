@@ -6,30 +6,56 @@
     tools:context=".HistoryMoodActivity">
 
     <!-- RecyclerView to display the list of mood entries -->
+
+
+    <!--    app:layout_constraintBottom_toTopOf="@+id/rvMoodEntries"-->
+    <Button
+        android:id="@+id/btnCancelJournal"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/cancel_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMoodEntries"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_mood_entry"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/etJournalEntry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/item_mood_entry" />
 
-    <!-- EditText for journal entry -->
     <EditText
         android:id="@+id/etJournalEntry"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/add_journal_entry"
         android:inputType="textMultiLine"
         android:minHeight="120dp"
         android:padding="16dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Button to save the journal entry -->
+    <Button
+        android:id="@+id/btnAddJournal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add_journal_entry"
+        app:layout_constraintBottom_toTopOf="@id/etJournalEntry"
+        app:layout_constraintEnd_toStartOf="@id/btnSaveJournal"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/btnSaveJournal"
         android:layout_width="wrap_content"
@@ -39,5 +65,6 @@
         app:layout_constraintBottom_toTopOf="@id/etJournalEntry"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

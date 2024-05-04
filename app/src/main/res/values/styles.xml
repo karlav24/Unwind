@@ -48,6 +48,11 @@
         <item name="android:textColor">#B0000000</item>
         <item name="android:fontFamily">@font/habibi_regular</item>
     </style>
+    <style name="journal">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#B0000000</item>
+        <item name="android:fontFamily">@font/habibi_regular</item>
+    </style>
     <style name="breathe">
         <item name="android:textSize">24sp</item>
         <item name="android:letterSpacing">0.05</item>

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.unwind.HistoryMoodActivity
 import com.example.unwind.Mood
 import com.example.unwind.ui.QuotesFragment
 import com.example.unwind.R
@@ -46,6 +47,11 @@ class HomeFragment : Fragment() {
         // Setting button click to open SettingsActivity
         binding.menuVector.setOnClickListener {
             val intent = Intent(activity, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.journal.setOnClickListener {
+            val intent = Intent(activity, HistoryMoodActivity::class.java)
             startActivity(intent)
         }
 
