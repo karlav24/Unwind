@@ -50,10 +50,14 @@ class HistoryMoodActivity: AppCompatActivity() {
             addJournalEntry(selectedDate, journalText)
         }
         val entries = getAllEntries()
-        var adapter = MoodEntryAdapter(entries)
+        val adapter = MoodEntryAdapter(entries, object : OnJournalEntryClickListener {
+            override fun onEntryClick(entry: UserEntry) {
+                // Handle click event if needed
+            }
+        })
         findViewById<RecyclerView>(R.id.rvMoodEntries).apply {
             layoutManager = LinearLayoutManager(this@HistoryMoodActivity)
-            adapter = adapter
+            this.adapter = adapter
         }
     }
 
