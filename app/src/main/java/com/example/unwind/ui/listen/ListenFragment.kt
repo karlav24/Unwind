@@ -25,6 +25,7 @@ import net.openid.appauth.AuthorizationException
 import net.openid.appauth.ResponseTypeValues
 import net.openid.appauth.AuthorizationServiceConfiguration
 import com.example.unwind.BuildConfig
+import android.util.Log
 
 data class ListenItem(val text: String)
 
@@ -92,17 +93,18 @@ class ListenFragment : Fragment() {
     private fun fetchSpotifyData(accessToken: String) {
         SpotifyApi.service.getUserPlaylists("Bearer $accessToken").enqueue(object : Callback<PlaylistsResponse> {
             override fun onResponse(call: Call<PlaylistsResponse>, response: Response<PlaylistsResponse>) {
-                if (response.isSuccessful) {
-                    // Convert the response into a data model or directly update UI
-                    val playlists = response.body()?.items ?: emptyList()
-                    // Update the UI with the playlists data, e.g. by setting it to RecyclerView adapter
-                } else {
-                    // Handle API errors here
+                activity?.runOnUiThread {
+                    if (response.isSuccessful) {
+                        // Update UI here
+                    } else {
+                        // Log error response
+                        Log.e("SpotifyDataFetch", "Error fetching playlists: ${response.errorBody()?.string()}")
+                    }
                 }
             }
 
             override fun onFailure(call: Call<PlaylistsResponse>, t: Throwable) {
-                // Handle network errors here
+                Log.e("SpotifyDataFetch", "Failed to fetch playlists", t)
             }
         })
     }

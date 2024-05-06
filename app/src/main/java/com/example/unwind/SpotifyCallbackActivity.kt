@@ -1,35 +1,80 @@
 package com.example.unwind
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.net.Uri
-import com.example.unwind.BuildConfig
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
+import net.openid.appauth.AuthorizationService
+import net.openid.appauth.TokenRequest
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
+import android.content.Intent
+import com.example.unwind.ui.listen.AudioPlayerActivity
 
 class SpotifyCallbackActivity : AppCompatActivity() {
+    private lateinit var authService: AuthorizationService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        authService = AuthorizationService(this)
+        val authResponse = AuthorizationResponse.fromIntent(intent)
+        val authException = AuthorizationException.fromIntent(intent)
 
-        // Handle the intent that was used to launch this activity
-        if (intent?.action == Intent.ACTION_VIEW) {
-            // Extract the authorization code or access token from the callback URI
-            val uri = intent.data
-            if (uri != null && uri.toString().startsWith(BuildConfig.SPOTIFY_REDIRECT_URI)) {
-                // Use the AppAuth library to extract the authorization code or access token
-                val authResponse = AuthorizationResponse.fromIntent(intent)
-                val authException = AuthorizationException.fromIntent(intent)
+        if (authResponse != null) {
+            exchangeAuthorizationCode(authResponse)
+        } else {
+            // Handle error
+            authException?.printStackTrace()
+        }
+    }
 
-                if (authResponse != null) {
-                    // Authorization was successful, exchange the code for a token
-                    // and then use it to access the Spotify API
-                } else if (authException != null) {
-                    // Handle error - the authorization flow failed
-                }
+    private fun exchangeAuthorizationCode(authResponse: AuthorizationResponse) {
+        val tokenExchangeRequest = authResponse.createTokenExchangeRequest()
+        authService.performTokenRequest(tokenExchangeRequest) { tokenResponse, exception ->
+            if (tokenResponse != null && exception == null) {
+                // Securely store the access token and refresh token
+                storeAccessToken(tokenResponse.accessToken.orEmpty())
+                storeRefreshToken(tokenResponse.refreshToken.orEmpty())
+
+                // Redirect to AudioPlayerActivity
+                redirectToAudioPlayer(tokenResponse.accessToken.orEmpty())
+            } else {
+                // Handle error
+                exception?.printStackTrace()
             }
         }
-        finish() // Close this activity after handling the redirect
+    }
+    private fun redirectToAudioPlayer(accessToken: String) {
+        val intent = Intent(this, AudioPlayerActivity::class.java)
+        intent.putExtra("SPOTIFY_ACCESS_TOKEN", accessToken)
+        startActivity(intent)
+        finish()  // Finish this activity so it's removed from the back stack
+    }
+    private fun storeAccessToken(accessToken: String) {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val sharedPreferences = EncryptedSharedPreferences.create(
+            "spotify_credentials",
+            masterKeyAlias,
+            this,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+        sharedPreferences.edit().putString("access_token", accessToken).apply()
+    }
+
+    private fun storeRefreshToken(refreshToken: String) {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val sharedPreferences = EncryptedSharedPreferences.create(
+            "spotify_credentials",
+            masterKeyAlias,
+            this,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+        sharedPreferences.edit().putString("refresh_token", refreshToken).apply()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        authService.dispose()
     }
 }
-
