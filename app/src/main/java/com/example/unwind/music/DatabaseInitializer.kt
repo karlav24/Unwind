@@ -3,19 +3,37 @@ package com.example.unwind.music
 import android.content.Context
 import android.util.Log
 import com.example.unwind.R
+import com.example.unwind.user.User
+import com.example.unwind.user.UserDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class DatabaseInitializer(private val context: Context) {
     private val musicTrackDao = MusicDatabase.getDatabase(context).musicTrackDao()
-
+    private val userDao = UserDatabase.getDatabase(context).userDao()
     suspend fun initializeDatabase() {
+        initializeMusicDatabase()
+        initializeUserDatabase()
+    }
+    suspend fun initializeMusicDatabase() {
         withContext(Dispatchers.IO) {
             if (musicTrackDao.getAllMusicTracks().isEmpty()) {
                 val musicTracks = loadMusicTracksFromRaw(context)
                 for (musicTrack in musicTracks) {
                     musicTrackDao.insertMusicTrack(musicTrack)
                 }
+            }
+        }
+    }
+    suspend fun initializeUserDatabase() {
+        withContext(Dispatchers.IO) {
+            val userDao = UserDatabase.getDatabase(context).userDao()
+
+            // Check if the user table is empty
+            if (userDao.getAllUsers().isEmpty()) {
+                // Perform database operations within this coroutine scope
+                val adminUser = User(name = "Admin", email = "admin@example.com", password = "admin123")
+                userDao.insert(adminUser)
             }
         }
     }

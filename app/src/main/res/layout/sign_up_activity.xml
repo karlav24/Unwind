@@ -7,7 +7,7 @@
     android:clipToOutline="true">
 
     <TextView
-        android:id="@+id/sign_in_to"
+        android:id="@+id/sign_up_for"
         android:layout_width="wrap_content"
         android:layout_height="39dp"
         android:layout_alignParentLeft="true"
@@ -15,7 +15,7 @@
         android:layout_marginLeft="28dp"
         android:layout_marginTop="52dp"
         android:gravity="top"
-        android:text="@string/sign_in_to"
+        android:text="Sign Up For"
         android:textAppearance="@style/sign_in_to" />
 
     <TextView
@@ -33,10 +33,21 @@
         android:textAppearance="@style/unwind" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@id/unwind"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="28dp"
+        android:hint="Name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/editTextName"
         android:layout_marginStart="28dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="28dp"
@@ -55,22 +66,12 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/buttonSignIn"
+        android:id="@+id/buttonSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Sign In" />
-
-    <Button
-        android:id="@+id/buttonSignUpRedirect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonSignIn"
-        android:layout_marginTop="23dp"
-        android:text="Don't have an account?"
-        android:translationX="105dp" />
-
+        android:text="Sign Up" />
 
 </RelativeLayout>

@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         scope.launch {
             val databaseInitializer = DatabaseInitializer(applicationContext)
             databaseInitializer.initializeDatabase()
+
         }
     }
 }
