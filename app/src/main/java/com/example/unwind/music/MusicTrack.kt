@@ -9,5 +9,8 @@ data class MusicTrack(
     val title: String,
     val artist: String,
     val genre: String,
-    val resourceId: Int
+    val resourceId: Int?,  // Make this nullable
+    val previewUrl: String? = null
 )
+
+

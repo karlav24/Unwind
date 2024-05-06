@@ -1,114 +1,132 @@
 package com.example.unwind.ui.listen
 
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.unwind.R
-import com.example.unwind.databinding.AudioPlayerBinding
 import com.example.unwind.music.DatabaseInitializer
 import com.example.unwind.music.MusicTrack
+import com.example.unwind.network.SavedTracksResponse
+import com.example.unwind.network.SpotifyApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 class AudioPlayerActivity : AppCompatActivity() {
 
-    private lateinit var mediaPlayer: MediaPlayer
+    private var mediaPlayer: MediaPlayer? = null
     private lateinit var playPauseButton: ImageView
     private lateinit var backButton: Button
     private lateinit var nextButton: ImageView
     private lateinit var previousButton: ImageView
-    private lateinit var musicTracks: List<MusicTrack>
+    private var musicTracks: MutableList<MusicTrack> = mutableListOf()
     private var currentTrackIndex: Int = 0
+    private lateinit var spotifyAccessToken: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.audio_player)
-        // Retrieve the selected genre from the intent extras
+        initializeUIComponents()
+
+        spotifyAccessToken = intent.getStringExtra("SPOTIFY_ACCESS_TOKEN") ?: ""
         val selectedGenre = intent.getStringExtra("SELECTED_GENRE")
-        // Launch a coroutine to perform database operation asynchronously
+
+        // Perform asynchronous operations to fetch music tracks
         GlobalScope.launch(Dispatchers.Main) {
-            // Use withContext to switch to the IO dispatcher for database operation
-            musicTracks = withContext(Dispatchers.IO) {
+            val localTracks = withContext(Dispatchers.IO) {
                 DatabaseInitializer(this@AudioPlayerActivity).getAllTracksByGenre(selectedGenre ?: "")
             }
+            musicTracks.addAll(localTracks)
 
             if (musicTracks.isNotEmpty()) {
-                // For simplicity, let's play the first song in the list
-                val resourceId = musicTracks[0].resourceId
-                mediaPlayer = MediaPlayer.create(this@AudioPlayerActivity, resourceId)
-                mediaPlayer.setOnCompletionListener {
-                    // Release MediaPlayer resources when playback completes
-                    mediaPlayer.release()
-                }
+                initializeMediaPlayer(0)
+            } else if (spotifyAccessToken.isNotEmpty()) {
+                fetchSpotifyTracks(spotifyAccessToken)
             } else {
-                // If no songs found for the selected genre, finish the activity
+                Log.e("AudioPlayerActivity", "No local songs found and no Spotify access token provided.")
                 finish()
-            }
-        }
-
-            playPauseButton = findViewById(R.id.play_pause_button)
-            playPauseButton.setOnClickListener {
-                onPlayPauseClick()
-            }
-
-            backButton = findViewById(R.id.button)
-            backButton.setOnClickListener {
-                finish()
-            }
-            nextButton = findViewById(R.id.next_track_button)
-            nextButton.setOnClickListener {
-                playNextTrack()
-            }
-
-            previousButton = findViewById(R.id.prev_track_button)
-            previousButton.setOnClickListener {
-                playPreviousTrack()
-            }
-        }
-        private fun initializeMediaPlayer(trackIndex: Int) {
-            mediaPlayer = MediaPlayer.create(this@AudioPlayerActivity, musicTracks[trackIndex].resourceId)
-            mediaPlayer.setOnCompletionListener {
-                // Release MediaPlayer resources when playback completes
-                mediaPlayer.release()
-            }
-        }
-        private fun onPlayPauseClick() {
-            mediaPlayer.let {
-                if (it.isPlaying) {
-                    it.pause()
-                    Log.d("AudioPlayerActivity", "Playback paused")
-                } else {
-                    it.start()
-                    Log.d("AudioPlayerActivity", "Playback started")
-                }
-            }
-        }
-        private fun playNextTrack() {
-            currentTrackIndex = (currentTrackIndex + 1) % musicTracks.size
-            mediaPlayer.release() // Release resources before initializing MediaPlayer with the next track
-            initializeMediaPlayer(currentTrackIndex)
-            mediaPlayer.start() // Start playback of the next track
-        }
-
-        private fun playPreviousTrack() {
-            currentTrackIndex = if (currentTrackIndex > 0) currentTrackIndex - 1 else musicTracks.size - 1
-            mediaPlayer.release() // Release resources before initializing MediaPlayer with the previous track
-            initializeMediaPlayer(currentTrackIndex)
-            mediaPlayer.start() // Start playback of the previous track
-        }
-
-    override fun onDestroy() {
-            super.onDestroy()
-            // Release the MediaPlayer resources when the activity is destroyed
-            if (::mediaPlayer.isInitialized) {
-                mediaPlayer.release()
             }
         }
     }
 
+    private fun initializeUIComponents() {
+        playPauseButton = findViewById(R.id.play_pause_button)
+        backButton = findViewById(R.id.button)
+        nextButton = findViewById(R.id.next_track_button)
+        previousButton = findViewById(R.id.prev_track_button)
 
+        playPauseButton.setOnClickListener { onPlayPauseClick() }
+        backButton.setOnClickListener { finish() }
+        nextButton.setOnClickListener { playNextTrack() }
+        previousButton.setOnClickListener { playPreviousTrack() }
+    }
 
+    private fun fetchSpotifyTracks(accessToken: String) {
+        SpotifyApi.service.getUserSavedTracks("Bearer $accessToken").enqueue(object : Callback<SavedTracksResponse> {
+            override fun onResponse(call: Call<SavedTracksResponse>, response: Response<SavedTracksResponse>) {
+                if (response.isSuccessful) {
+                    val tracks = response.body()?.items?.map { it.track } ?: listOf()
+                    GlobalScope.launch(Dispatchers.Main) {
+                        musicTracks.addAll(tracks.map { track ->
+                            MusicTrack(title = track.name, artist = "Spotify Artist", genre = "Spotify", resourceId = null, previewUrl = track.preview_url)
+                        })
+                        if (musicTracks.isNotEmpty()) initializeMediaPlayer(0)
+                    }
+                } else {
+                    Log.e("AudioPlayerActivity", "Error fetching Spotify tracks: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<SavedTracksResponse>, t: Throwable) {
+                Log.e("AudioPlayerActivity", "Failed to fetch Spotify tracks", t)
+            }
+        })
+    }
+
+    private fun initializeMediaPlayer(trackIndex: Int) {
+        mediaPlayer?.release()  // Release any existing MediaPlayer instance
+        val track = musicTracks[trackIndex]
+
+        val mediaUri = if (track.previewUrl != null) Uri.parse(track.previewUrl) else Uri.parse("android.resource://${packageName}/${track.resourceId}")
+        mediaPlayer = MediaPlayer.create(this, mediaUri)
+        mediaPlayer?.apply {
+            setOnCompletionListener {
+                playNextTrack()
+            }
+            start()
+        }
+    }
+
+    private fun onPlayPauseClick() {
+        mediaPlayer?.let {
+            if (it.isPlaying) {
+                it.pause()
+            } else {
+                it.start()
+            }
+        }
+    }
+
+    private fun playNextTrack() {
+        currentTrackIndex = (currentTrackIndex + 1) % musicTracks.size
+        initializeMediaPlayer(currentTrackIndex)
+    }
+
+    private fun playPreviousTrack() {
+        currentTrackIndex = if (currentTrackIndex > 0) currentTrackIndex - 1 else musicTracks.size - 1
+        initializeMediaPlayer(currentTrackIndex)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release()
+    }
+}

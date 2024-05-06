@@ -10,21 +10,34 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import android.content.Intent
 import com.example.unwind.ui.listen.AudioPlayerActivity
+import android.util.Log
 
 class SpotifyCallbackActivity : AppCompatActivity() {
     private lateinit var authService: AuthorizationService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("CallbackActivity", "Intent Data URI: " + intent.dataString)  // Log the entire URI
+
         authService = AuthorizationService(this)
         val authResponse = AuthorizationResponse.fromIntent(intent)
         val authException = AuthorizationException.fromIntent(intent)
 
         if (authResponse != null) {
+            Log.d("CallbackActivity", "AuthorizationResponse obtained successfully")
             exchangeAuthorizationCode(authResponse)
         } else {
-            // Handle error
-            authException?.printStackTrace()
+            Log.e("CallbackActivity", "No AuthorizationResponse, checking manually")
+            if (intent.data != null && intent.data?.getQueryParameter("code") != null) {
+                val code = intent.data?.getQueryParameter("code")
+                Log.d("CallbackActivity", "Manual code extraction: $code")
+                // Manually handle the authorization code if needed
+            }
+            if (authException != null) {
+                authException.printStackTrace()
+            } else {
+                Log.e("CallbackActivity", "No Auth data received")
+            }
         }
     }
 
