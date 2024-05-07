@@ -11,8 +11,11 @@ plugins {
 android {
     namespace = "com.example.unwind"
     compileSdk = 34
+
     buildFeatures{
         buildConfig = true
+        dataBinding = true
+        viewBinding = true
     }
     defaultConfig {
         applicationId = "com.example.unwind"
@@ -34,9 +37,11 @@ android {
             buildConfigField("String", "SPOTIFY_CLIENT_ID", "\"${secretsProperties["SPOTIFY_CLIENT_ID"]}\"")
             buildConfigField("String", "SPOTIFY_CLIENT_SECRET", "\"${secretsProperties["SPOTIFY_CLIENT_SECRET"]}\"")
             buildConfigField("String", "SPOTIFY_REDIRECT_URI", "\"${secretsProperties["SPOTIFY_REDIRECT_URI"]}\"")
+            buildConfigField("String", "OPENAI_SECRET_KEY", "\"${secretsProperties["OPENAI_SECRET_KEY"]}\"")
         } else {
             throw FileNotFoundException("Could not find secrets.properties file at ${secretsPropertiesFile.absolutePath}")
         }
+
     }
 
     buildTypes {
@@ -67,22 +72,22 @@ repositories{
 }
 dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.preference:preference:1.2.0")
+    implementation("androidx.preference:preference:1.2.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     ksp("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("net.openid:appauth:0.11.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Converter for JSON
     implementation("com.squareup.okhttp3:okhttp:4.9.0") // OkHttp
@@ -92,5 +97,7 @@ dependencies {
     implementation("androidx.security:security-crypto:1.0.0-rc04")
     implementation("com.paypal.android:card-payments:1.4.0")
     implementation("com.paypal.android:paypal-web-payments:1.4.0")
+    implementation("androidx.security:security-crypto:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
 }

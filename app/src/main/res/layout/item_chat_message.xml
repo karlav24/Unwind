@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <!-- Declare variables if needed, for example, you might want to bind message details directly -->
+        <variable
+            name="message"
+            type="com.example.unwind.model.Message" />
+    </data>
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:layout_margin="4dp"
+        android:text="@{message.text}" /> <!-- Example of binding the text property -->
+</layout>
