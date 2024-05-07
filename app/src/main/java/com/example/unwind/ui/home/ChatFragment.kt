@@ -21,15 +21,7 @@ import kotlinx.coroutines.launch
 class ChatFragment : Fragment() {
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
-    private val chatViewModel: ChatViewModel by viewModels {
-        activity?.application?.let {
-            if (it is UnwindApplication) {
-                ViewModelFactory(it.openAiService)
-            } else {
-                throw IllegalStateException("Application must be of type UnwindApplication")
-            }
-        } ?: throw IllegalStateException("Application context not available")
-    }
+    private val chatViewModel: ChatViewModel by viewModels { ViewModelFactory() }
     private lateinit var chatAdapter: ChatAdapter
 
     override fun onCreateView(
@@ -55,7 +47,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        chatAdapter = ChatAdapter(mutableListOf())  // Ensuring it's a MutableList
+        chatAdapter = ChatAdapter(mutableListOf())
         binding.chatRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = chatAdapter

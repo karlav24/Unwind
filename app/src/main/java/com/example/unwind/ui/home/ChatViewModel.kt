@@ -16,15 +16,17 @@ class ChatViewModel(private val openAiService: OpenAiService) : ViewModel() {
     fun sendMessage(text: String) {
         val trimmedText = text.trim()
         if (trimmedText.isNotEmpty()) {
-            // Append user message
             _messages.value = _messages.value + Message(text, System.currentTimeMillis(), true)
-
-            // Send to API
             viewModelScope.launch {
-                val response = openAiService.createCompletion(ChatRequest(prompt = trimmedText, max_tokens = 150))
-                val botMessage = response.choices.firstOrNull()?.text?.trim() ?: "Error: Unable to get a response."
-                _messages.value = _messages.value + Message(botMessage, System.currentTimeMillis(), false)
+                try {
+                    val response = openAiService.createCompletion(ChatRequest(prompt = trimmedText, max_tokens = 150))
+                    val botMessage = response.choices.firstOrNull()?.text?.trim() ?: "Error: Unable to get a response."
+                    _messages.value = _messages.value + Message(botMessage, System.currentTimeMillis(), false)
+                } catch (e: Exception) {
+                    _messages.value = _messages.value + Message("Failed to send message: ${e.message}", System.currentTimeMillis(), false)
+                }
             }
         }
     }
 }
+

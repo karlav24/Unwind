@@ -27,7 +27,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "unwindapp"
         // Load the Spotify credentials
-        val secretsPropertiesFile = rootProject.file("secrets.properties")
+        val secretsPropertiesFile = file("src/main/resources/secrets.properties")
         if (secretsPropertiesFile.exists()) {
             val secretsProperties = Properties().apply {
                 load(secretsPropertiesFile.inputStream())
