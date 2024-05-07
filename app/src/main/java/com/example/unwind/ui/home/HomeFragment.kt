@@ -18,6 +18,7 @@ import com.example.unwind.ui.SettingsActivity
 import com.example.unwind.databinding.FragmentHomeBinding
 import com.google.gson.Gson
 import java.time.LocalDate
+import com.example.unwind.ui.ChatActivity
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -61,6 +62,10 @@ class HomeFragment : Fragment() {
         binding.depressedEmoji.setOnClickListener { changeEmojiColor(binding.depressedEmoji, Mood.DEPRESSED) }
         binding.mehEmoji.setOnClickListener { changeEmojiColor(binding.mehEmoji, Mood.MEH) }
 
+        binding.gptButton.setOnClickListener {
+            val intent = Intent(activity, ChatActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
@@ -125,4 +130,3 @@ class HomeFragment : Fragment() {
 
 
 }
-

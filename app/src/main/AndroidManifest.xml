@@ -26,6 +26,10 @@
             android:exported="true"
             android:label="@string/title_activity_settings" />
         <activity
+            android:name=".ui.ChatActivity"
+            android:label="@string/activity_chat"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
