@@ -63,9 +63,9 @@ class HomeFragment : Fragment() {
             breatheImgButton.setOnClickListener { findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard) }
             listenImgButton.setOnClickListener { findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications) }
 
-            // Add GPT button listener here
             gptButton.setOnClickListener {
-                findNavController().navigate(R.id.navigation_chat)
+                val intent = Intent(context, ChatActivity::class.java)
+                startActivity(intent)
             }
         }
     }

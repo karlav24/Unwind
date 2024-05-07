@@ -1,15 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <!-- Declare variables here if necessary -->
-    </data>
+<!-- res/layout/activity_chat.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.ChatActivity">
 
-    <FrameLayout
-        android:id="@+id/chat_container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
 
-        <!-- Optionally, you can add other views, such as a toolbar or status bar -->
-    </FrameLayout>
-</layout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/messageEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Type a message" />
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send" />
+    </LinearLayout>
+
+</LinearLayout>
+

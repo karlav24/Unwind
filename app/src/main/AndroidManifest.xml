@@ -13,11 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unwind"
         tools:targetApi="31">
-
         <activity
             android:name=".ui.Nav"
             android:exported="false"
             android:label="@string/title_activity_nav" />
+        <activity android:name=".ui.home.ChatActivity">
+        </activity>
+
         <activity
             android:name=".ui.SettingsActivity"
             android:exported="false"

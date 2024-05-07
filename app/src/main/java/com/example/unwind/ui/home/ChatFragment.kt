@@ -1,6 +1,7 @@
 package com.example.unwind.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,7 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("ChatFragment", "onCreateView called")
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -58,11 +60,13 @@ class ChatFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = chatAdapter
         }
+        Log.d("ChatFragment", "RecyclerView set up")
     }
 
     private fun observeMessages() {
         lifecycleScope.launch {
             chatViewModel.messages.collect { messages ->
+                Log.d("ChatFragment", "Messages observed: ${messages.size}")
                 chatAdapter.updateData(messages)
             }
         }
@@ -71,5 +75,6 @@ class ChatFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        Log.d("ChatFragment", "onDestroyView called and binding cleared")
     }
 }
