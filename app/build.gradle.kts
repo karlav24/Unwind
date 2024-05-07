@@ -60,7 +60,11 @@ android {
         buildConfig = true
     }
 }
-
+repositories{
+    google()
+    gradlePluginPortal()
+    mavenCentral()
+}
 dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.preference:preference:1.2.0")
@@ -86,5 +90,7 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("androidx.security:security-crypto:1.0.0-rc04")
+    implementation("com.paypal.android:card-payments:1.4.0")
+    implementation("com.paypal.android:paypal-web-payments:1.4.0")
 
 }
