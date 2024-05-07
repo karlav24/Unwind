@@ -72,7 +72,7 @@
         </activity>
 
         <activity
-            android:name=".HistoryMoodActivity"
+            android:name=".user.journal.HistoryMoodActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

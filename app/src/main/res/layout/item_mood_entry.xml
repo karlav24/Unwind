@@ -31,6 +31,18 @@
         app:layout_constraintBottom_toTopOf="@id/tvJournalPreview"
         android:elevation="2dp"/>
 
+    <EditText
+        android:id="@+id/etJournalTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/habibi_regular"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvJournalPreview"/>
+
     <TextView
         android:id="@+id/tvJournalPreview"
         android:layout_width="0dp"
