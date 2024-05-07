@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HistoryMoodActivity">
+    tools:context=".user.journal.HistoryMoodActivity">
 
     <!-- RecyclerView to display the list of mood entries -->
 
@@ -34,12 +34,26 @@
         tools:listitem="@layout/item_mood_entry" />
 
     <EditText
+        android:id="@+id/etJournalTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/habibi_regular"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/etJournalEntry"/>
+
+    <EditText
         android:id="@+id/etJournalEntry"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:minHeight="120dp"
         android:padding="16dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/habibi_regular"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
