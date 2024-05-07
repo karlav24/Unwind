@@ -21,7 +21,6 @@ import com.example.unwind.user.journal.HistoryMoodActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import com.example.unwind.ui.ChatActivity
 
 class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
@@ -66,8 +65,7 @@ class HomeFragment : Fragment() {
 
             // Add GPT button listener here
             gptButton.setOnClickListener {
-                val intent = Intent(activity, ChatActivity::class.java)
-                startActivity(intent)
+                findNavController().navigate(R.id.navigation_chat)
             }
         }
     }

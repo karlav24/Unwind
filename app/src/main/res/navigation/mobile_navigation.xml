@@ -32,4 +32,9 @@
         android:name="com.example.unwind.ui.listen.ListenFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_listen" />
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.example.unwind.ui.home.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>

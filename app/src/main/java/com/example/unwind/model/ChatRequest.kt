@@ -1,4 +1,6 @@
 package com.example.unwind.model
 
-class ChatRequest {
-}
+data class ChatRequest(
+    val prompt: String,
+    val max_tokens: Int
+)
