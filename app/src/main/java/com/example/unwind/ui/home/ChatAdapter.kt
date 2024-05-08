@@ -39,19 +39,17 @@ class ChatAdapter(private val messages: MutableList<Message>) : RecyclerView.Ada
 
     override fun getItemCount() = messages.size
 
-    fun updateData(newMessages: List<Message>) {
-        val positionStart = messages.size
-        messages.addAll(newMessages)
-        notifyItemRangeInserted(positionStart, newMessages.size)
+    fun updateData(newMessage: Message) {
+        messages.add(newMessage)  // Add new message to the list
+        notifyItemInserted(messages.size - 1)  // Notify that a new item has been inserted
     }
-
 
     class UserMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.textUserMessage)
 
         fun bind(message: Message) {
             textView.text = message.text
-            itemView.layoutDirection = View.LAYOUT_DIRECTION_RTL // Ensures text alignment to the right
+            textView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
         }
     }
 
@@ -60,7 +58,7 @@ class ChatAdapter(private val messages: MutableList<Message>) : RecyclerView.Ada
 
         fun bind(message: Message) {
             textView.text = message.text
-            itemView.layoutDirection = View.LAYOUT_DIRECTION_LTR // Ensures text alignment to the left
+            textView.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
         }
     }
 }

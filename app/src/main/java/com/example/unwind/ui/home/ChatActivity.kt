@@ -47,9 +47,14 @@ class ChatActivity : AppCompatActivity() {
 
     private fun observeMessages() {
         lifecycleScope.launch {
-            chatViewModel.messages.collect { messages ->
-                chatAdapter.updateData(messages)
-                scrollToBottom()
+            chatViewModel.messages.collect { newMessages ->
+                // Check if there are new messages to add
+                if (chatAdapter.itemCount < newMessages.size) {
+                    for (index in chatAdapter.itemCount until newMessages.size) {
+                        chatAdapter.updateData(newMessages[index])
+                    }
+                    scrollToBottom()
+                }
             }
         }
     }

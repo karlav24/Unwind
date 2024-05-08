@@ -1,9 +1,17 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textUserMessage"
-    android:layout_width="wrap_content"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_user_message"
-    android:padding="8dp"
-    android:textColor="#000000"
-    android:layout_gravity="end"
-    android:textSize="16sp"/>
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/textUserMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:padding="10dp"
+        android:background="@drawable/bg_user_message"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:maxWidth="280dp"/>
+</FrameLayout>

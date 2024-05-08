@@ -1,10 +1,20 @@
-<!-- res/layout/activity_chat.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.home.ChatActivity">
+
+    <!-- TextView for App Name/Logo as Text -->
+    <TextView
+        android:id="@+id/unwind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="17dp"
+        android:text="@string/unwind"
+        android:textAppearance="@style/unwind"
+        android:textSize="47dp" /> <!-- Adjusted text size for smaller appearance -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
