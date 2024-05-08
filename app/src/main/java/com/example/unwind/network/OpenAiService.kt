@@ -8,6 +8,6 @@ import com.example.unwind.model.ChatResponse
 
 interface OpenAiService {
     @Headers("Content-Type: application/json")
-    @POST("v1/engines/davinci-codex/completions")
+    @POST("v1/engines/gpt-3.5-turbo/completions")
     suspend fun createCompletion(@Body request: ChatRequest): ChatResponse
 }
