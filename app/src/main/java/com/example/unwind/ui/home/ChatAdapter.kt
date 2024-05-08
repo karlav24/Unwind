@@ -3,34 +3,64 @@ package com.example.unwind.ui.chat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.unwind.databinding.ItemChatMessageBinding
+import com.example.unwind.R
 import com.example.unwind.model.Message
 
-class ChatAdapter(private var messages: MutableList<Message>) : RecyclerView.Adapter<ChatAdapter.MessageViewHolder>() {
+class ChatAdapter(private val messages: MutableList<Message>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-        val binding = ItemChatMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MessageViewHolder(binding)
+    companion object {
+        private const val VIEW_TYPE_USER_MESSAGE = 1
+        private const val VIEW_TYPE_GPT_RESPONSE = 2
     }
 
-    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        holder.bind(messages[position])
+    override fun getItemViewType(position: Int): Int {
+        return if (messages[position].isSentByUser) VIEW_TYPE_USER_MESSAGE else VIEW_TYPE_GPT_RESPONSE
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return if (viewType == VIEW_TYPE_USER_MESSAGE) {
+            UserMessageViewHolder(inflater.inflate(R.layout.item_user_message, parent, false))
+        } else {
+            GptMessageViewHolder(inflater.inflate(R.layout.item_gpt_response, parent, false))
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val message = messages[position]
+        if (holder is UserMessageViewHolder) {
+            holder.bind(message)
+        } else if (holder is GptMessageViewHolder) {
+            holder.bind(message)
+        }
     }
 
     override fun getItemCount() = messages.size
 
     fun updateData(newMessages: List<Message>) {
-        messages.clear()
+        val positionStart = messages.size
         messages.addAll(newMessages)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(positionStart, newMessages.size)
     }
 
-    class MessageViewHolder(private val binding: ItemChatMessageBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    class UserMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val textView: TextView = itemView.findViewById(R.id.textUserMessage)
+
         fun bind(message: Message) {
-            binding.messageText.text = message.text
-            // Here you can add logic to differentiate the styling of messages sent by the user vs. responses from the bot
-            binding.messageText.textAlignment = if (message.isSentByUser) View.TEXT_ALIGNMENT_TEXT_END else View.TEXT_ALIGNMENT_TEXT_START
+            textView.text = message.text
+            itemView.layoutDirection = View.LAYOUT_DIRECTION_RTL // Ensures text alignment to the right
+        }
+    }
+
+    class GptMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val textView: TextView = itemView.findViewById(R.id.textGptMessage)
+
+        fun bind(message: Message) {
+            textView.text = message.text
+            itemView.layoutDirection = View.LAYOUT_DIRECTION_LTR // Ensures text alignment to the left
         }
     }
 }

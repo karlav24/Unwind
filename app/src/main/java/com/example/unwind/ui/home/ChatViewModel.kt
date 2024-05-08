@@ -17,21 +17,43 @@ class ChatViewModel(private val openAiService: OpenAiService) : ViewModel() {
     fun sendMessage(text: String) {
         val trimmedText = text.trim()
         if (trimmedText.isNotEmpty()) {
-            // Append user message
-            _messages.value = _messages.value + Message(text, System.currentTimeMillis(), true)
+            // Log the action of sending a message
+            Log.d("ChatViewModel", "Sending message: $trimmedText")
 
-            // Send to API
+            // Create user message and append to current list
+            val userMessage = Message(trimmedText, System.currentTimeMillis(), true)
+            updateMessages(userMessage)
+
+            // Launch coroutine to handle API response
             viewModelScope.launch {
                 try {
-                    val response = openAiService.createCompletion(ChatRequest(prompt = trimmedText, max_tokens = 150))
-                    val botMessage = response.choices.firstOrNull()?.text?.trim() ?: "Error: Unable to get a response."
-                    _messages.value = _messages.value + Message(botMessage, System.currentTimeMillis(), false)
+                    val chatRequest = ChatRequest(
+                        messages = listOf(mapOf("role" to "user", "content" to trimmedText)),
+                        max_tokens = 150,
+                        model = "gpt-3.5-turbo"
+                    )
+                    val response = openAiService.createCompletion(chatRequest)
+                    response.choices.firstOrNull()?.message?.content?.let {
+                        val botMessage = Message(it, System.currentTimeMillis(), false)
+                        updateMessages(botMessage)
+                    }
                 } catch (e: Exception) {
-                    _messages.value = _messages.value + Message("Failed to send message: ${e.message}", System.currentTimeMillis(), false)
-                    Log.e("ChatViewModel", "Error sending message", e)
+                    // Handle exceptions and log errors
+                    val errorMessage = "Failed to send message: ${e.message}"
+                    updateMessages(Message(errorMessage, System.currentTimeMillis(), false))
+                    Log.e("ChatViewModel", errorMessage, e)
                 }
             }
         }
+    }
+
+    // Function to safely update message list
+    private fun updateMessages(newMessage: Message) {
+        val updatedList = _messages.value.toMutableList().apply {
+            add(newMessage)
+        }
+        _messages.value = updatedList
+        Log.d("ChatViewModel", "Message added: ${newMessage.text}")
     }
 }
 

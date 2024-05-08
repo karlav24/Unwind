@@ -49,7 +49,15 @@ class ChatActivity : AppCompatActivity() {
         lifecycleScope.launch {
             chatViewModel.messages.collect { messages ->
                 chatAdapter.updateData(messages)
+                scrollToBottom()
             }
         }
     }
+
+    private fun scrollToBottom() {
+        if (chatAdapter.itemCount > 0) {
+            binding.chatRecyclerView.smoothScrollToPosition(chatAdapter.itemCount - 1)
+        }
+    }
+
 }
