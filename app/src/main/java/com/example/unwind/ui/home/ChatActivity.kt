@@ -1,13 +1,15 @@
 package com.example.unwind.ui.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.unwind.databinding.ActivityChatBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.unwind.databinding.ActivityChatBinding
 import com.example.unwind.ui.chat.ChatAdapter
 import kotlinx.coroutines.launch
+
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -63,6 +65,9 @@ class ChatActivity : AppCompatActivity() {
         if (chatAdapter.itemCount > 0) {
             binding.chatRecyclerView.smoothScrollToPosition(chatAdapter.itemCount - 1)
         }
+    }
+    fun onBackPressed(view: View?) {
+        super.onBackPressed()
     }
 
 }
