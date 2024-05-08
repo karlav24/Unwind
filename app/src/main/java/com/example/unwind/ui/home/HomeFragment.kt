@@ -20,6 +20,7 @@ import com.example.unwind.ui.SettingsActivity
 import com.example.unwind.user.journal.HistoryMoodActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 
 class HomeFragment : Fragment() {
@@ -82,26 +83,22 @@ class HomeFragment : Fragment() {
 
     private fun selectMood(mood: Mood) {
         val currentDate = LocalDate.now()
-        val currentMood = getCurrentMood()
+        getCurrentMood(currentDate, mood)
+    }
 
-        if (currentMood != null && currentMood.date == currentDate) {
-            Toast.makeText(context, "You've already set your mood today!", Toast.LENGTH_SHORT).show()
-        } else {
-            selectedMood = mood
-            recordUserEntry(mood)
+    private fun getCurrentMood(date: LocalDate, mood: Mood) {
+        lifecycleScope.launch {
+            val currentMood = UserEntryDatabase.getDatabase(requireContext()).userEntryDao().findEntryByDate(date.toString())
+            if (currentMood != null) {
+                Toast.makeText(context, "You've already set your mood today!", Toast.LENGTH_SHORT).show()
+            } else {
+                recordUserEntry(mood, date)
+            }
         }
     }
 
-    private fun getCurrentMood(): UserEntry? {
-        return context?.let {
-            val sharedPreferences = it.getSharedPreferences("prefs", Context.MODE_PRIVATE)
-            val entryJson = sharedPreferences.getString(LocalDate.now().toString(), null)
-            Gson().fromJson(entryJson, UserEntry::class.java)
-        }
-    }
-
-    private fun recordUserEntry(mood: Mood) {
-        val entry = UserEntry(date = LocalDate.now(), mood = mood)
+    private fun recordUserEntry(mood: Mood, date: LocalDate) {
+        val entry = UserEntry(date = date, mood = mood)
         saveEntry(entry)
     }
 

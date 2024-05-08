@@ -70,7 +70,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="49dp"
         android:layout_marginEnd="17dp"
-        android:gravity="top"
+        android:gravity="center_horizontal"
         android:textAlignment="center"
         android:text="@string/start"
         android:textAppearance="@style/start"

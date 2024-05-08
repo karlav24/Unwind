@@ -55,13 +55,21 @@ class MoodEntryAdapter(private val entries: List<UserEntry>, private val clickLi
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val moodEmojiImageView: ImageView = itemView.findViewById(R.id.ivMoodEmoji)
+        private val noMoodTextView: TextView = itemView.findViewById(R.id.tvNoMoodSelected)
         private val entryDateTextView: TextView = itemView.findViewById(R.id.tvMoodDate)
         private val entryTextView: TextView = itemView.findViewById(R.id.tvJournalPreview)
 
         fun bind(entry: UserEntry, clickListener: (UserEntry) -> Unit) {
-            moodEmojiImageView.setImageResource(getMoodDrawable(entry.mood))
+            if (entry.mood == Mood.NOT_SET) {
+                moodEmojiImageView.visibility = View.GONE
+                noMoodTextView.visibility = View.VISIBLE
+            } else {
+                moodEmojiImageView.visibility = View.VISIBLE
+                noMoodTextView.visibility = View.GONE
+                moodEmojiImageView.setImageResource(getMoodDrawable(entry.mood))
+            }
             entryDateTextView.text = entry.date.toString()
-            entryTextView.text = entry.journalText
+            entryTextView.text = entry.journalText ?: ""
             itemView.setOnClickListener { clickListener(entry) }
         }
 
@@ -72,10 +80,11 @@ class MoodEntryAdapter(private val entries: List<UserEntry>, private val clickLi
                 Mood.MEH -> R.drawable.meh_emoji
                 Mood.SAD -> R.drawable.sad_emoji
                 Mood.DEPRESSED -> R.drawable.depressed_emoji
-                Mood.NOT_SET -> 0
+                else -> 0
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_mood_entry, parent, false)

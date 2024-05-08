@@ -2,8 +2,6 @@ package com.example.unwind.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.unwind.utils.DateConverter
 import java.time.LocalDate
 
 @Entity(tableName = "journal_entries")

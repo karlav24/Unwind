@@ -5,6 +5,16 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
+    <TextView
+        android:id="@+id/tvNoMoodSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_mood_selected"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:textAppearance="?attr/textAppearanceBody1" />
+
+
     <ImageView
         android:id="@+id/ivMoodEmoji"
         android:contentDescription="@string/mood_you_selected"

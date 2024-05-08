@@ -88,4 +88,5 @@
     <string name="depressed_emoji">depressed emoji</string>
     <string name="elated_emoji">elated emoji</string>
     <string name="okay_feeling_emoji">okay feeling emoji</string>
+    <string name="no_mood_selected">No mood selected.</string>
 </resources>

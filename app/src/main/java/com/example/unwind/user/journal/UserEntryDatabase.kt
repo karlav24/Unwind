@@ -1,4 +1,5 @@
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -6,10 +7,13 @@ import androidx.room.TypeConverters
 import com.example.unwind.model.UserEntry
 import com.example.unwind.user.journal.UserEntryDao
 import com.example.unwind.utils.DateConverter
+import com.example.unwind.utils.MoodConverter
+
 @Database(entities = [UserEntry::class], version = 1, exportSchema = false)
-@TypeConverters(DateConverter::class)
+@TypeConverters(DateConverter::class, MoodConverter::class)
 abstract class UserEntryDatabase : RoomDatabase() {
     abstract fun userEntryDao(): UserEntryDao
+
     companion object {
         @Volatile
         private var INSTANCE: UserEntryDatabase? = null
@@ -22,6 +26,7 @@ abstract class UserEntryDatabase : RoomDatabase() {
                     "user_entry_database"
                 ).fallbackToDestructiveMigration()
                     .build()
+                Log.d("Database", "Database instance created")
                 INSTANCE = instance
                 instance
             }
