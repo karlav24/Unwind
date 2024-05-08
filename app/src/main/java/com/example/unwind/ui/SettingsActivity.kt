@@ -6,14 +6,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.unwind.PaymentActivity
 import com.example.unwind.R
 
 class SettingsActivity : AppCompatActivity() {
-    //private lateinit var premiumButton : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings)
-        //premiumButton = findViewById(R.id.unwind_prem)
 
         val backButton = findViewById<View>(R.id.back_button)
         backButton.setOnClickListener {
@@ -34,10 +33,7 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(this, PremiumActivity::class.java)
             startActivity(intent)
         }
-        /*premiumButton.setOnClickListener{
-            val intent = Intent(this, PaymentActivity::class.java)
-            startActivity(intent)
-        }
-           */
+
     }
+
 }
