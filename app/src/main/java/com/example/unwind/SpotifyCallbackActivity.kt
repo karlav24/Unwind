@@ -74,10 +74,12 @@ class SpotifyCallbackActivity : AppCompatActivity() {
         }
     }
     private fun redirectToAudioPlayer(accessToken: String) {
-        val intent = Intent(this, AudioPlayerActivity::class.java)
-        intent.putExtra("SPOTIFY_ACCESS_TOKEN", accessToken)
+        val intent = Intent(this, AudioPlayerActivity::class.java).apply {
+            putExtra("SPOTIFY_ACCESS_TOKEN", accessToken)
+            // Remove flags that clear the entire back stack
+        }
         startActivity(intent)
-        finish()  // Finish this activity so it's removed from the back stack
+        finish()  // Consider if you need to call finish() depending on your flow
     }
     private fun storeAccessToken(accessToken: String) {
         val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
