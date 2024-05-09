@@ -58,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         // No user with the same email exists, proceed with signup
-        val newUser = User(name = name, email = email, password = password, premium = false)
+        val newUser = User(name = name, email = email, password = password)
         userDao.insert(newUser)
 
         // Signup successful, navigate to another screen (e.g., login screen)
