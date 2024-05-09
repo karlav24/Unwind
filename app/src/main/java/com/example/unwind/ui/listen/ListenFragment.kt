@@ -1,52 +1,53 @@
 package com.example.unwind.ui.listen
 
-import android.graphics.Rect
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.unwind.BuildConfig
 import com.example.unwind.databinding.FragmentListenBinding
-import com.example.unwind.network.SpotifyApi
 import com.example.unwind.network.PlaylistsResponse
-import net.openid.appauth.*
+import com.example.unwind.network.SpotifyApi
+import com.example.unwind.utils.AuthStateManager
+import net.openid.appauth.AuthorizationException
+import net.openid.appauth.AuthorizationRequest
+import net.openid.appauth.AuthorizationResponse
+import net.openid.appauth.AuthorizationService
+import net.openid.appauth.AuthorizationServiceConfiguration
+import net.openid.appauth.ResponseTypeValues
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.recyclerview.widget.RecyclerView
-import android.net.Uri
-import net.openid.appauth.AuthorizationService
-import net.openid.appauth.AuthorizationRequest
-import net.openid.appauth.AuthorizationResponse
-import net.openid.appauth.AuthorizationException
-import net.openid.appauth.ResponseTypeValues
-import net.openid.appauth.AuthorizationServiceConfiguration
-import com.example.unwind.BuildConfig
-import android.util.Log
 
 data class ListenItem(val text: String)
 
 class ListenFragment : Fragment() {
-
     private var _binding: FragmentListenBinding? = null
     private val binding get() = _binding!!
-
-    // Spotify Auth Variables
     private lateinit var authService: AuthorizationService
-    private lateinit var authState: AuthState
+    private lateinit var authActivityResultLauncher: ActivityResultLauncher<Intent>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentListenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         authService = AuthorizationService(requireContext())
+        setupActivityResultLauncher()
+
         binding.spotifyImage.setOnClickListener {
             startSpotifyAuthentication()
         }
@@ -58,48 +59,51 @@ class ListenFragment : Fragment() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = ListenAdapter(getDummyData())
-            //addItemDecoration(TopSpacingDecoration(paddingTop = resources.getDimensionPixelSize(R.dimen.recycler_view_padding_top), paddingBottom = resources.getDimensionPixelSize(R.dimen.recycler_view_padding_bottom), spacing = resources.getDimensionPixelSize(R.dimen.recycler_view_spacing)))
         }
     }
 
-    private fun getDummyData(): List<ListenItem> {
-        return listOf(
-            ListenItem("Affirmation Audio"),
-            ListenItem("Calm Music"),
-            ListenItem("Nature Sounds"),
-            ListenItem("Color Noise")
-        )
+    private fun setupActivityResultLauncher() {
+        authActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == androidx.appcompat.app.AppCompatActivity.RESULT_OK) {
+                handleSpotifyResponse(result.data)
+            }
+        }
     }
 
-    private fun startSpotifyAuthentication() {
-        val serviceConfig = AuthorizationServiceConfiguration(
-            Uri.parse("https://accounts.spotify.com/authorize"), // Spotify authorization endpoint
-            Uri.parse("https://accounts.spotify.com/api/token") // Spotify token endpoint
-        )
+    private fun handleSpotifyResponse(data: Intent?) {
+        Log.d("SpotifyAuth", "Received intent data: ${data?.dataString}")  // Log the complete URI for debugging
+        data?.let {
+            val authResponse = AuthorizationResponse.fromIntent(it)
+            val authException = AuthorizationException.fromIntent(it)
 
-        // Use BuildConfig to pull client ID and redirect URI
-        val authRequest = AuthorizationRequest.Builder(
-            serviceConfig,
-            BuildConfig.SPOTIFY_CLIENT_ID,
-            ResponseTypeValues.CODE,
-            Uri.parse(BuildConfig.SPOTIFY_REDIRECT_URI)
-        ).setScopes(*arrayOf("playlist-read-private", "user-library-read"))
-            .build() // add more scopes as needed
+            if (authException != null) {
+                Log.e("SpotifyAuth", "Authorization exception occurred", authException)
+            }
 
-        val authIntent = authService.getAuthorizationRequestIntent(authRequest)
-        startActivityForResult(authIntent, AUTH_REQUEST_CODE)
+            if (authResponse != null) {
+                authService.performTokenRequest(authResponse.createTokenExchangeRequest()) { tokenResponse, exception ->
+                    if (tokenResponse != null && exception == null) {
+                        val accessToken = tokenResponse.accessToken.orEmpty()
+                        fetchSpotifyData(accessToken)
+                    } else {
+                        Log.e("SpotifyAuth", "Token exchange error", exception)
+                    }
+                }
+            } else {
+                Log.e("SpotifyAuth", "No Authorization response received")
+            }
+        } ?: run {
+            Log.e("SpotifyAuth", "Intent data is null")
+        }
     }
 
     private fun fetchSpotifyData(accessToken: String) {
         SpotifyApi.service.getUserPlaylists("Bearer $accessToken").enqueue(object : Callback<PlaylistsResponse> {
             override fun onResponse(call: Call<PlaylistsResponse>, response: Response<PlaylistsResponse>) {
-                activity?.runOnUiThread {
-                    if (response.isSuccessful) {
-                        // Update UI here
-                    } else {
-                        // Log error response
-                        Log.e("SpotifyDataFetch", "Error fetching playlists: ${response.errorBody()?.string()}")
-                    }
+                if (response.isSuccessful) {
+                    Log.d("SpotifyDataFetch", "Successfully fetched playlists")
+                } else {
+                    Log.e("SpotifyDataFetch", "Error fetching playlists: ${response.errorBody()?.string()}")
                 }
             }
 
@@ -109,52 +113,35 @@ class ListenFragment : Fragment() {
         })
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == AUTH_REQUEST_CODE && data != null) {
-            val authResponse = AuthorizationResponse.fromIntent(data)
-            val authException = AuthorizationException.fromIntent(data)
+    private fun startSpotifyAuthentication() {
+        val serviceConfig = AuthorizationServiceConfiguration(
+            Uri.parse("https://accounts.spotify.com/authorize"),
+            Uri.parse("https://accounts.spotify.com/api/token")
+        )
+        val authRequest = AuthorizationRequest.Builder(
+            serviceConfig,
+            BuildConfig.SPOTIFY_CLIENT_ID,
+            ResponseTypeValues.CODE,
+            Uri.parse(BuildConfig.SPOTIFY_REDIRECT_URI)
+        ).setScopes("playlist-read-private", "user-library-read").build()
 
-            if (authResponse != null && authException == null) {
-                authService.performTokenRequest(
-                    authResponse.createTokenExchangeRequest()
-                ) { tokenResponse, exception ->
-                    if (tokenResponse != null && exception == null) {
-                        // Use the access token to make API calls
-                        val accessToken = tokenResponse.accessToken.orEmpty()
-                        fetchSpotifyData(accessToken)
-                    } else {
-                        // Handle error
-                    }
-                }
-            } else {
-                // Handle other cases such as errors
-            }
-        }
+        // Store the AuthorizationRequest for later retrieval in the callback activity
+        AuthStateManager.setAuthRequest(authRequest)
+
+        val authIntent = authService.getAuthorizationRequestIntent(authRequest)
+        authActivityResultLauncher.launch(authIntent)
     }
+
+    private fun getDummyData(): List<ListenItem> = listOf(
+        ListenItem("Affirmation Audio"),
+        ListenItem("Calm Music"),
+        ListenItem("Nature Sounds"),
+        ListenItem("Color Noise")
+    )
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
         authService.dispose()
-    }
-
-    companion object {
-        const val AUTH_REQUEST_CODE = 1001
-        // Other constants as needed
-    }
-}
-
-class TopSpacingDecoration(private val paddingTop: Int, private val paddingBottom: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        val position = parent.getChildAdapterPosition(view)
-        outRect.top = spacing
-        outRect.bottom = spacing
-//        if (position == 0) {
-//            outRect.top = paddingTop
-//        }
-//        if (position == parent.adapter!!.itemCount - 1) {
-//            outRect.bottom = paddingBottom
-//        }
-
     }
 }

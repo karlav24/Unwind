@@ -14,6 +14,12 @@ class ChatViewModel(private val openAiService: OpenAiService) : ViewModel() {
     private val _messages = MutableStateFlow<List<Message>>(emptyList())
     val messages = _messages.asStateFlow()
 
+    fun startConversation() {
+        // Add an initial greeting message when the chat starts
+        val initialGreeting = "Hello! I'm here to help you unwind. How are you feeling today?"
+        addMessage(Message(initialGreeting, System.currentTimeMillis(), false)) // false as it's not a user message
+    }
+
     private fun addMessage(newMessage: Message) {
         val currentList = _messages.value.toMutableList()
         currentList.add(newMessage) // Add the new message
@@ -23,9 +29,11 @@ class ChatViewModel(private val openAiService: OpenAiService) : ViewModel() {
     fun sendMessage(text: String) {
         val trimmedText = text.trim()
         if (trimmedText.isNotEmpty()) {
+            // Add user's message to the chat
             val userMessage = Message(trimmedText, System.currentTimeMillis(), true)
             addMessage(userMessage)
 
+            // Generate a follow-up question or response
             viewModelScope.launch {
                 try {
                     val chatRequest = ChatRequest(
@@ -46,4 +54,5 @@ class ChatViewModel(private val openAiService: OpenAiService) : ViewModel() {
             }
         }
     }
+
 }

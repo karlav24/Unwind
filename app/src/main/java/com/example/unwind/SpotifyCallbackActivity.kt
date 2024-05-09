@@ -11,13 +11,14 @@ import androidx.security.crypto.MasterKeys
 import android.content.Intent
 import com.example.unwind.ui.listen.AudioPlayerActivity
 import android.util.Log
+import com.example.unwind.utils.AuthStateManager
 
 class SpotifyCallbackActivity : AppCompatActivity() {
     private lateinit var authService: AuthorizationService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("CallbackActivity", "Intent Data URI: " + intent.dataString)  // Log the entire URI
+        Log.d("CallbackActivity", "Intent Data URI: " + intent?.dataString)  // Log the entire URI
 
         authService = AuthorizationService(this)
         val authResponse = AuthorizationResponse.fromIntent(intent)
@@ -30,16 +31,31 @@ class SpotifyCallbackActivity : AppCompatActivity() {
             Log.e("CallbackActivity", "No AuthorizationResponse, checking manually")
             if (intent.data != null && intent.data?.getQueryParameter("code") != null) {
                 val code = intent.data?.getQueryParameter("code")
-                Log.d("CallbackActivity", "Manual code extraction: $code")
-                // Manually handle the authorization code if needed
+                val state = intent.data?.getQueryParameter("state")
+                val authRequest = AuthStateManager.getAuthRequest()
+
+                if (authRequest != null) {
+                    val manualAuthResponse = AuthorizationResponse.Builder(authRequest)
+                        .setAuthorizationCode(code)
+                        .setState(state)
+                        .build()
+
+                    exchangeAuthorizationCode(manualAuthResponse)
+                } else {
+                    Log.e("CallbackActivity", "AuthorizationRequest is null")
+                }
+            } else {
+                Log.e("CallbackActivity", "Intent Data is null or missing code")
             }
             if (authException != null) {
+                Log.e("CallbackActivity", "AuthorizationException occurred")
                 authException.printStackTrace()
             } else {
                 Log.e("CallbackActivity", "No Auth data received")
             }
         }
     }
+
 
     private fun exchangeAuthorizationCode(authResponse: AuthorizationResponse) {
         val tokenExchangeRequest = authResponse.createTokenExchangeRequest()

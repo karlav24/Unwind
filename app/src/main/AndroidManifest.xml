@@ -64,7 +64,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- This activity will handle the redirect URI -->
+        <!-- this activity will handle the redirect URI -->
         <activity android:name=".SpotifyCallbackActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

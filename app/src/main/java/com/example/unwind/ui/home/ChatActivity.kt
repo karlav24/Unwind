@@ -25,6 +25,9 @@ class ChatActivity : AppCompatActivity() {
         setupRecyclerView()
         observeMessages()
 
+        // Start the initial conversation
+        chatViewModel.startConversation()
+
         binding.sendButton.setOnClickListener {
             val text = binding.messageEditText.text.toString()
             if (text.isNotEmpty()) {
