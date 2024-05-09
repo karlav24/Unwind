@@ -1,6 +1,8 @@
 package com.example.unwind
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -23,44 +25,67 @@ import com.paypal.android.paypalwebpayments.PayPalWebCheckoutResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import com.paypal.android.paypalwebpayments.*
 
 class PaymentActivity : AppCompatActivity() {
     private val authService = PayPalAuthService()
     private val payPalService = PayPalService()
-    private lateinit var paypalButton: PayPalButton
+    private lateinit var payPalWebCheckoutClient: PayPalWebCheckoutClient
+    private lateinit var returnUrl: String
+    private lateinit var accessToken: String
+    private lateinit var orderId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
-        paypalButton = findViewById(R.id.paypal_button)
-        val config = CoreConfig("CLIENT_ID", environment = Environment.SANDBOX)
-        val returnUrl = "unwind://"
-        val payPalWebCheckoutClient = PayPalWebCheckoutClient(this@PaymentActivity, config, returnUrl)
+        orderId = AppData.orderId
+        // Initialize PayPalWebCheckoutClient
+        val config = CoreConfig("ARUQBsQhd4ePCllg2Ri45l803pcaNczYuC7Q0CvVk8w4C_64OLO8I4lygON34wqIQH3hdTAO4LPb8F2_", environment = Environment.SANDBOX)
+        returnUrl = "unwind://payment" // Customize the return URL as per your app's deep linking scheme
+        payPalWebCheckoutClient = PayPalWebCheckoutClient(this@PaymentActivity, config, returnUrl)
+
+        // Set listener for PayPalWebCheckoutClient
         payPalWebCheckoutClient.listener = object : PayPalWebCheckoutListener {
             override fun onPayPalWebSuccess(result: PayPalWebCheckoutResult) {
-                // order was approved and is ready to be captured/authorized (see step 7)
+                // Handle PayPal web success
+                orderId?.let { authorizeAndCapture(it, accessToken) }
+
+                // Do not start another activity here, as this method will be called multiple times
+                // Instead, handle redirection back to the app in onNewIntent
             }
+
             override fun onPayPalWebFailure(error: PayPalSDKError) {
-                // handle the error
+                // Handle PayPal web failure
+                Log.e("PayPalWebFailure", "PayPalWebFailure callback invoked: $error")
             }
+
             override fun onPayPalWebCanceled() {
-                // the user canceled the flow
+                // Handle PayPal web cancellation
+                Log.e("PayPalWebCancelled", "PayPalWebCancelled callback invoked")
             }
         }
+
+        // Obtain access token and create PayPal order
+        obtainAccessTokenAndCreateOrder()
+    }
+
+    private fun obtainAccessTokenAndCreateOrder() {
         val clientId = "ARUQBsQhd4ePCllg2Ri45l803pcaNczYuC7Q0CvVk8w4C_64OLO8I4lygON34wqIQH3hdTAO4LPb8F2_"
         val clientSecret = "EAmWYCIyyqQzy-wjfhrZN2vTQZ_1ARSM7JGLYB9nN40dmm3tp0ptMJ393KQ4-4cyR944Ni73f8d0sLwE"
-        authService.getAccessToken(clientId, clientSecret) { accessToken ->
-            if (accessToken != null) {
-                payPalService.createOrder(accessToken, this) { orderId, errorMessage ->
-                    if (orderId != null) {
-                        // Order created successfully, use orderId
-                        Log.d("OrderID", orderId)
-                        // Start the PayPal checkout with the obtained order ID
-                        val payPalWebCheckoutRequest = PayPalWebCheckoutRequest(orderId, fundingSource = PayPalWebCheckoutFundingSource.PAYPAL)
+        authService.getAccessToken(clientId, clientSecret) { token ->
+            if (token != null) {
+                accessToken = token
+                payPalService.createOrder(token, this@PaymentActivity) { Id, errorMessage ->
+                    if (Id != null) {
+                        // Order created successfully, start PayPal checkout
+                        orderId = Id
+                        AppData.orderId = Id
+                        Log.d("CreateOrder", "Order id is {AppData.orderId}")
+                        val payPalWebCheckoutRequest = PayPalWebCheckoutRequest(Id)
                         payPalWebCheckoutClient.start(payPalWebCheckoutRequest)
-                        authorizeAndCapture(accessToken, orderId)
                     } else {
-                        // Handle error
-                        Log.e("OrderCreationError", errorMessage ?: "Unknown error")
+                        // Handle error while creating order
+                        Log.e("OrderCreationError", "Failed to create order: ${errorMessage ?: "Unknown error"}")
                     }
                 }
             } else {
@@ -71,29 +96,48 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(newIntent: Intent?) {
-        super.onNewIntent(intent)
+        super.onNewIntent(newIntent)
         intent = newIntent
-    }
 
-    private fun authorizeAndCapture(accessToken: String, orderId: String) {
-        payPalService.authorizePayment(accessToken, orderId) { isAuthorized, authorizeErrorMessage ->
-            if (isAuthorized) {
-                // Authorization successful, capture the payment
-                payPalService.capturePayment(accessToken, orderId) { isCaptured, captureErrorMessage ->
-                    if (isCaptured) {
-                        // Payment captured successfully
-                        Log.d("PaymentCapture", "Payment captured successfully")
-                    } else {
-                        // Capture failed
-                        Log.e("PaymentCaptureError", captureErrorMessage ?: "Unknown error")
-                    }
-                }
+        // Handle the URI redirect here
+        if (intent?.action == Intent.ACTION_VIEW) {
+            // It might be good to reload or confirm orderId here if necessary
+            orderId = AppData.orderId
+            if (orderId != null) {
+                Log.d("AccessToken", "The access token is {$accessToken}")
+                authorizeAndCapture(orderId, accessToken)
             } else {
-                // Authorization failed
-                Log.e("PaymentAuthorizationError", authorizeErrorMessage ?: "Unknown error")
+                // Handle error: orderId not found
+                Log.e("PaymentActivity", "Order ID not found in URI")
             }
         }
     }
 
 
+    private fun extractOrderIdFromReturnUrl(returnUrl: String): String? {
+        val uri = Uri.parse(returnUrl)
+        return uri.getQueryParameter("orderId")
+    }
+
+    private fun authorizeAndCapture(Id: String, Token: String) {
+        Log.d("AuthorizePayment", "Order ID: $orderId")
+        //payPalService.authorizePayment(accessToken, orderId) { isAuthorized, authorizeErrorMessage ->
+          //  if (isAuthorized) {
+                // Authorization successful, capture the payment
+            //    Log.d("AuthorizePayment", "Authorization successful")
+        payPalService.capturePayment(accessToken, orderId) { isCaptured, captureErrorMessage ->
+            if (isCaptured) {
+                // Payment captured successfully
+                Log.d("PaymentCapture", "Payment captured successfully")
+            } else {
+                // Capture failed
+                Log.e("PaymentCaptureError", "Failed to capture payment: ${captureErrorMessage ?: "Unknown error"}")
+            }
+        }
+            //} else {
+                // Authorization failed
+            //    Log.e("PaymentAuthorizationError", "Failed to authorize payment: ${authorizeErrorMessage ?: "Unknown error"}")
+            //}
+        //}
+    }
 }

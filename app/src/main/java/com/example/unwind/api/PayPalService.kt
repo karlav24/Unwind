@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import com.example.unwind.AppData
 import com.example.unwind.model.AccessTokenResponse
 import com.example.unwind.model.Amount
+import com.example.unwind.model.ApplicationContext
 import com.example.unwind.model.CreateOrderRequest
 import com.example.unwind.model.OrderResponse
 import com.example.unwind.model.PurchaseUnitRequest
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,8 +21,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PayPalService {
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.sandbox.paypal.com")
+    val logging = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
+    val client = OkHttpClient.Builder()
+        .addInterceptor(logging)
+        .build()
+
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://api-m.sandbox.paypal.com/")
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -31,6 +44,10 @@ class PayPalService {
                 PurchaseUnitRequest(
                     amount = Amount("USD", "10.00")
                 )
+            ),
+            applicationContext = ApplicationContext(
+                returnUrl = "unwind://payment", // Replace with your return URL
+                cancelUrl = "unwind://payment"  // Replace with your cancel URL
             )
         )
 
@@ -46,17 +63,25 @@ class PayPalService {
                     val orderResponse = response.body()
                     Log.d("CreateOrderResponse", orderResponse.toString())
 
-                    // Retrieve the approve link
-                    val approveLink = orderResponse?.links?.find { it.rel == "approve" }?.href
-                    if (!approveLink.isNullOrEmpty()) {
-                        // Redirect the user to the approve link
-                        // Implement redirection logic here, such as opening a web browser with the approve link
-                        // For example:
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(approveLink))
-                        context.startActivity(intent)
-                    } else {
-                        // If the approve link is not found, handle the error
-                        callback(null, "Approve link not found")
+                    // Extract the Order ID and set it in AppData
+                    orderResponse?.id?.let { orderId ->
+                        AppData.orderId = orderId
+                        Log.d("AppData", "Order ID set in AppData: $orderId")
+
+                        // Retrieve the approve link
+                        val approveLink = orderResponse.links.find { it.rel == "approve" }?.href
+                        if (!approveLink.isNullOrEmpty()) {
+                            // Redirect the user to the approve link
+                            // Implement redirection logic here, such as opening a web browser with the approve link
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(approveLink))
+                            context.startActivity(intent)
+                        } else {
+                            // If the approve link is not found, handle the error
+                            callback(null, "Approve link not found")
+                        }
+                    } ?: run {
+                        Log.e("OrderCreationError", "Failed to extract Order ID")
+                        callback(null, "Failed to extract Order ID")
                     }
                 } else {
                     // Handle unsuccessful response
@@ -74,28 +99,44 @@ class PayPalService {
     }
 
     fun authorizePayment(accessToken: String, orderId: String, callback: (Boolean, String?) -> Unit) {
-        // Modify the call to pass the access token as a header
-        val call = apiService.authorizeOrder("Bearer $accessToken", orderId)
+        if (orderId.isEmpty()) {
+            Log.e("AuthorizePaymentError", "Order ID is empty or invalid.")
+            callback(false, "Order ID is empty or invalid")
+            return
+        }
+
+        val headers = mapOf(
+            "Authorization" to "Bearer $accessToken",
+            "Content-Type" to "application/json"
+        )
+
+        val call = apiService.authorizeOrder(orderId, headers)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    callback(true, null) // Authorization successful
+                    callback(true, null)
                 } else {
-                    val errorMessage = response.errorBody()?.string() ?: "Unknown error"
-                    callback(false, errorMessage) // Authorization failed
+                    val error = response.errorBody()?.string() ?: "Unknown error"
+                    Log.e("AuthorizePaymentError", "Failed to authorize payment: $error")
+                    callback(false, error)
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                val errorMessage = t.message ?: "Unknown error"
-                callback(false, errorMessage) // Authorization failed
+                Log.e("AuthorizePaymentFailure", "Failed to process the authorization: ${t.message}")
+                callback(false, t.message ?: "Unknown error")
             }
         })
     }
 
     // Function to capture the payment
     fun capturePayment(accessToken: String, orderId: String, callback: (Boolean, String?) -> Unit) {
-        val call = apiService.captureOrder("Bearer $accessToken", orderId)
+        val headers = mapOf(
+            "Authorization" to "Bearer $accessToken",
+            "Content-Type" to "application/json"
+        )
+
+        val call = apiService.captureOrder(orderId, headers)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
