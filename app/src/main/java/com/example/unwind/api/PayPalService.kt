@@ -42,7 +42,7 @@ class PayPalService {
             intent = "CAPTURE",
             purchaseUnits = listOf(
                 PurchaseUnitRequest(
-                    amount = Amount("USD", "10.00")
+                    amount = Amount("USD", "30.00")
                 )
             ),
             applicationContext = ApplicationContext(
