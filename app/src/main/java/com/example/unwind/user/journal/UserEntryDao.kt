@@ -15,4 +15,7 @@ interface UserEntryDao {
 
     @Query("SELECT * FROM journal_entries WHERE date = :date LIMIT 1")
     suspend fun findEntryByDate(date: String): UserEntry?
+
+    @Query("SELECT * FROM journal_entries")
+    suspend fun getAllUserEntries(): List<UserEntry>
 }

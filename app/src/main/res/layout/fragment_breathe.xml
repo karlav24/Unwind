@@ -108,19 +108,17 @@
         android:id="@+id/the_breath_"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:elevation="5dp"
         android:gravity="right|top"
         android:text="@string/the_breath_"
         android:textAppearance="@style/the_breath_"
 
         app:layout_constraintEnd_toEndOf="@+id/rectangle_breathe2"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/rectangle_breathe2"
         app:layout_constraintTop_toTopOf="@+id/rectangle_breathe2" />
-
 
     <TextView
         android:id="@+id/kundalini_y"
@@ -131,8 +129,6 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="100dp"
         android:elevation="5dp"
-        android:text="@string/kundalini_y"
-        android:textAppearance="@style/kundalini_y"
         app:layout_constraintBottom_toBottomOf="@id/rectangle_breathe2"
         app:layout_constraintEnd_toEndOf="@id/rectangle_breathe2"
         app:layout_constraintHorizontal_bias="1.0"

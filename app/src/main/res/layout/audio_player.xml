@@ -29,25 +29,11 @@
         android:translationX="20dp" />
 
 
-    <TextView
-        android:id="@+id/the_robin"
-        android:layout_width="176dp"
-        android:layout_height="39dp"
-        android:layout_below="@id/audio_player_pic"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="99dp"
-        android:layout_marginTop="466dp"
-        android:gravity="top"
-        android:text="@string/song_title"
-        android:textAppearance="@style/song_title"
-        android:translationX="25dp" />
-
     <ImageView
         android:id="@+id/play_pause_button"
         android:layout_width="100dp"
         android:layout_height="112dp"
-        android:layout_below="@id/the_robin"
+        android:layout_below="@id/audio_player_pic"
         android:layout_marginTop="5dp"
         android:clickable="true"
         android:onClick="onPlayPauseClick"
@@ -60,7 +46,7 @@
         android:id="@+id/next_track_button"
         android:layout_width="82dp"
         android:layout_height="77dp"
-        android:layout_below="@id/the_robin"
+        android:layout_below="@id/audio_player_pic"
         android:layout_alignParentRight="true"
         android:layout_marginTop="29dp"
         android:layout_marginRight="85dp"
@@ -72,7 +58,7 @@
         android:id="@+id/prev_track_button"
         android:layout_width="84dp"
         android:layout_height="58dp"
-        android:layout_below="@id/the_robin"
+        android:layout_below="@id/audio_player_pic"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="29dp"
         android:layout_marginTop="39dp"

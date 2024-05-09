@@ -123,10 +123,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.962" />
 
-    <View
+    <ImageView
         android:layout_width="60dp"
         android:layout_height="56dp"
-        android:background="@drawable/health_connect"
+        android:src="@mipmap/spotify_img_round"
         android:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"
@@ -151,11 +151,11 @@
     <TextView
         android:id="@+id/connect_you"
         android:layout_width="233dp"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:elevation="5dp"
         android:gravity="top"
-        android:text="@string/connect_you"
+        android:text="@string/spotify_prem"
         android:textAppearance="@style/connect_you"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_prem"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_prem"

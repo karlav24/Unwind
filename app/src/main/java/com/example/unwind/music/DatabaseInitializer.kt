@@ -3,6 +3,7 @@ package com.example.unwind.music
 import android.content.Context
 import android.util.Log
 import com.example.unwind.R
+import com.example.unwind.model.UserEntry
 import com.example.unwind.user.User
 import com.example.unwind.user.UserDatabase
 import kotlinx.coroutines.Dispatchers
@@ -11,9 +12,11 @@ import kotlinx.coroutines.withContext
 class DatabaseInitializer(private val context: Context) {
     private val musicTrackDao = MusicDatabase.getDatabase(context).musicTrackDao()
     private val userDao = UserDatabase.getDatabase(context).userDao()
+    //private val userEntryDao = UserEntryDatabase.getDatabase(context).userEntryDao()
     suspend fun initializeDatabase() {
         initializeMusicDatabase()
         initializeUserDatabase()
+      //  initializeUserEntryDatabase()
     }
     suspend fun initializeMusicDatabase() {
         withContext(Dispatchers.IO) {
@@ -28,15 +31,24 @@ class DatabaseInitializer(private val context: Context) {
     suspend fun initializeUserDatabase() {
         withContext(Dispatchers.IO) {
             val userDao = UserDatabase.getDatabase(context).userDao()
-
             // Check if the user table is empty
             if (userDao.getAllUsers().isEmpty()) {
                 // Perform database operations within this coroutine scope
-                val adminUser = User(name = "Admin", email = "admin@example.com", password = "admin123")
+                val adminUser = User(name = "Admin", email = "admin@example.com", password = "admin123"              )
                 userDao.insert(adminUser)
             }
         }
     }
+    /*
+    suspend fun initializeUserEntryDatabase() {
+        withContext(Dispatchers.IO) {
+            // This ensures the DAO is available, without inserting any initial data
+            val userEntries = userEntryDao.getAllUserEntries()
+            // Optionally, you can log or verify data retrieval without modifying the database
+            Log.d("DatabaseInitializer", "User entries count: ${userEntries.size}")
+        }
+    }
+    */
     suspend fun getAllTracksByGenre(genre: String): List<MusicTrack> {
         val lowercaseGenre = genre.lowercase()
         return withContext(Dispatchers.IO) {
