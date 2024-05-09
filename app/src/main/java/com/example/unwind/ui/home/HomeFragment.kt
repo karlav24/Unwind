@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.unwind.AppData
 import com.example.unwind.R
 import com.example.unwind.databinding.FragmentHomeBinding
 import com.example.unwind.model.Mood
@@ -26,7 +28,6 @@ class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
 
     private var selectedMood: Mood? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
         this.binding = binding
@@ -46,7 +47,6 @@ class HomeFragment : Fragment() {
     private fun setupViews() {
         binding?.apply {
             welcomeBac.text = activity?.intent?.getStringExtra("userName")?.let { "Welcome back, $it!" } ?: "Welcome back!"
-
             journal.setOnClickListener {
                 val intent = Intent(activity, HistoryMoodActivity::class.java).apply {
                     putExtra("mood", selectedMood?.name)
@@ -64,8 +64,14 @@ class HomeFragment : Fragment() {
             listenImgButton.setOnClickListener { findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications) }
 
             gptButton.setOnClickListener {
-                val intent = Intent(context, ChatActivity::class.java)
-                startActivity(intent)
+                if (AppData.orderId != ""){
+                    val intent = Intent(context, ChatActivity::class.java)
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(context, "This feature is only for premium members", Toast.LENGTH_LONG).show()
+                }
+
             }
         }
     }

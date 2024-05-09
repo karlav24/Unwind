@@ -1,4 +1,5 @@
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,14 +17,19 @@ abstract class UserEntryDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): UserEntryDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    UserEntryDatabase::class.java,
-                    "user_entry_database"
-                ).fallbackToDestructiveMigration()
-                    .build()
-                INSTANCE = instance
-                instance
+                try {
+                    val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        UserEntryDatabase::class.java,
+                        "user_entry_database"
+                    ).fallbackToDestructiveMigration()
+                        .build()
+                    INSTANCE = instance
+                    instance
+                } catch (e: Exception) {
+                    Log.e("DatabaseCreation", "Error creating database", e)
+                    throw e // Re-throw to ensure it's still caught by higher-level error handlers
+                }
             }
         }
     }

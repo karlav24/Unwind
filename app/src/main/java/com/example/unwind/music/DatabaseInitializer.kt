@@ -32,7 +32,7 @@ class DatabaseInitializer(private val context: Context) {
             // Check if the user table is empty
             if (userDao.getAllUsers().isEmpty()) {
                 // Perform database operations within this coroutine scope
-                val adminUser = User(name = "Admin", email = "admin@example.com", password = "admin123")
+                val adminUser = User(name = "Admin", email = "admin@example.com", password = "admin123", premium = false)
                 userDao.insert(adminUser)
             }
         }
