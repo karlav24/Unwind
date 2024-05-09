@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.unwind.AppData
 import com.example.unwind.BuildConfig
 import com.example.unwind.databinding.FragmentListenBinding
 import com.example.unwind.network.PlaylistsResponse
@@ -49,7 +51,13 @@ class ListenFragment : Fragment() {
         setupActivityResultLauncher()
 
         binding.spotifyImage.setOnClickListener {
-            startSpotifyAuthentication()
+            if(AppData.orderId != ""){
+                startSpotifyAuthentication()
+            }
+            else{
+                Toast.makeText(context, "This feature is only for premium members", Toast.LENGTH_LONG).show()
+            }
+
         }
 
         binding.backButton.setOnClickListener {
