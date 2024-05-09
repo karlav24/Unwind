@@ -99,5 +99,6 @@ dependencies {
     implementation("com.paypal.android:paypal-web-payments:1.4.0")
     implementation("androidx.security:security-crypto:1.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-
+    implementation("com.paypal.android:paypal-web-payments:1.4.0")
+    implementation("com.paypal.android:payment-buttons:1.4.0")
 }
