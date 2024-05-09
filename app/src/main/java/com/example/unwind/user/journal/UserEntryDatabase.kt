@@ -22,14 +22,18 @@ abstract class UserEntryDatabase : RoomDatabase() {
         private var INSTANCE: UserEntryDatabase? = null
 
         fun getDatabase(context: Context): UserEntryDatabase {
-            return INSTANCE ?: synchronized(this) {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     UserEntryDatabase::class.java,
                     "user_entry_database"
-                ).build()
-                INSTANCE = instance
-                instance
+                ).fallbackToDestructiveMigration() // Optional, to handle migrations
+                    .build()
+                return instance
             }
         }
     }

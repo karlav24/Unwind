@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.unwind.R
+import com.example.unwind.SignUpActivity
 import com.example.unwind.music.DatabaseInitializer
 import com.example.unwind.music.MusicTrack
 import com.example.unwind.network.SavedTracksResponse
@@ -36,7 +37,9 @@ class AudioPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.audio_player)
         initializeUIComponents()
-
+        backButton.setOnClickListener {
+            finish()
+        }
         spotifyAccessToken = intent.getStringExtra("SPOTIFY_ACCESS_TOKEN") ?: ""
         val selectedGenre = intent.getStringExtra("SELECTED_GENRE")
 

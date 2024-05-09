@@ -16,7 +16,7 @@ class DatabaseInitializer(private val context: Context) {
     suspend fun initializeDatabase() {
         initializeMusicDatabase()
         initializeUserDatabase()
-      //  initializeUserEntryDatabase()
+    //    initializeUserEntryDatabase()
     }
     suspend fun initializeMusicDatabase() {
         withContext(Dispatchers.IO) {
@@ -39,16 +39,16 @@ class DatabaseInitializer(private val context: Context) {
             }
         }
     }
-    /*
     suspend fun initializeUserEntryDatabase() {
         withContext(Dispatchers.IO) {
-            // This ensures the DAO is available, without inserting any initial data
-            val userEntries = userEntryDao.getAllUserEntries()
-            // Optionally, you can log or verify data retrieval without modifying the database
-            Log.d("DatabaseInitializer", "User entries count: ${userEntries.size}")
+            try {
+                //val userEntries = userEntryDao.getAllUserEntries()
+                //Log.d("DatabaseInitializer", "User entries count: ${userEntries.size}")
+            } catch (e: Exception) {
+                Log.e("DatabaseInitializer", "Error initializing UserEntryDatabase", e)
+            }
         }
     }
-    */
     suspend fun getAllTracksByGenre(genre: String): List<MusicTrack> {
         val lowercaseGenre = genre.lowercase()
         return withContext(Dispatchers.IO) {

@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         setupMoodButtons()
+
         val quotesFragment = QuotesFragment()
         childFragmentManager.beginTransaction()
             .replace(R.id.fragmentQuoteContainer, quotesFragment)
@@ -47,12 +48,6 @@ class HomeFragment : Fragment() {
     private fun setupViews() {
         binding?.apply {
             welcomeBac.text = activity?.intent?.getStringExtra("userName")?.let { "Welcome back, $it!" } ?: "Welcome back!"
-            journal.setOnClickListener {
-                val intent = Intent(activity, HistoryMoodActivity::class.java).apply {
-                    putExtra("mood", selectedMood?.name)
-                }
-                startActivity(intent)
-            }
 
             menuVector.setOnClickListener {
                 val intent = Intent(activity, SettingsActivity::class.java)
@@ -78,11 +73,21 @@ class HomeFragment : Fragment() {
 
     private fun setupMoodButtons() {
         binding?.apply {
-            happyEmoji.setOnClickListener { selectMood(Mood.HAPPY) }
-            sadEmoji.setOnClickListener { selectMood(Mood.SAD) }
-            elatedEmoji.setOnClickListener { selectMood(Mood.ELATED) }
-            depressedEmoji.setOnClickListener { selectMood(Mood.DEPRESSED) }
-            mehEmoji.setOnClickListener { selectMood(Mood.MEH) }
+            happyEmoji.setOnClickListener {
+                Toast.makeText(context, "Thanks for letting us know!", Toast.LENGTH_LONG).show()
+            }
+            sadEmoji.setOnClickListener {
+                Toast.makeText(context, "Thanks for letting us know!", Toast.LENGTH_LONG).show()
+            }
+            elatedEmoji.setOnClickListener {
+                Toast.makeText(context, "Thanks for letting us know!", Toast.LENGTH_LONG).show()
+            }
+            depressedEmoji.setOnClickListener {
+                Toast.makeText(context, "Thanks for letting us know!", Toast.LENGTH_LONG).show()
+            }
+            mehEmoji.setOnClickListener {
+                Toast.makeText(context, "Thanks for letting us know!", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
